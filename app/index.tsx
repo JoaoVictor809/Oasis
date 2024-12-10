@@ -24,8 +24,9 @@ export default function Index() {
       </View>
       <View style={Estilo.botao}>
         <Pressable>
-        <Link href={'./pages/pag2'}/>
+        <Link href={'./pages/pag2'}>
         <Image source={require('../assets/images/botao001.png')}/>
+        </Link>
         </Pressable>
       </View>
       
