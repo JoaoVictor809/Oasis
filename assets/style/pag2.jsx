@@ -28,11 +28,32 @@ export default StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         paddingTop:200,
-        
+        display:'flex',
+        gap:30
     },
     txt:{
-        fontSize:20,
-        fontFamily:'Super Ocean Personal Use'
+        fontSize:30,
+        fontFamily:'MinhaFonte-Regular'
     },
-    
+    txt002:{
+        fontFamily: 'Fonte-texto',
+        fontSize:15,
+        textAlign:'center'
+    },
+    back:{
+        fontSize:25,
+        fontFamily:'MinhaFonte-Regular',
+        color:'#000'
+    },
+    next:{
+        fontSize:25,
+        fontFamily:'MinhaFonte-Regular',
+        color:'#1261D7'
+    },
+    container002:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'space-around'
+        
+    }
 })
