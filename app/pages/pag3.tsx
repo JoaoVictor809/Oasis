@@ -8,11 +8,10 @@ import { useFonts } from "expo-font";
 // Mantenha a tela de splash visível até que as fontes tenham carregado
 SplashScreen.preventAutoHideAsync();
 
-export default function pag2() {
+export default function pag3() {
     const [fontsLoaded] = useFonts({
         'MinhaFonte-Regular': require('../../assets/fonts/superOcean.ttf'),
         'Fonte-texto': require('../../assets/fonts/TitilliumWeb-Regular.ttf')
-
     });
 
     // Oculta a tela de splash quando as fontes são carregadas
@@ -40,23 +39,23 @@ export default function pag2() {
             </ImageBackground>
 
             <View style={Estilo.containerMain}>
-                <Image source={require('../../assets/images/pratico.png')} />
-                <Text style={Estilo.txt}>Estudos práticos</Text>
+                <Image source={require('../../assets/images/cronograma.png')} />
+                <Text style={Estilo.txt}>Cronograma único</Text>
                 <Text style={Estilo.txt002}>
-                Eficiência e praticidade em um só lugar. <br />
-                Nosso app te prepara para qualquer prova <br />
-                com conteúdos concisos e exercícios <br />
-                direcionados.
+                Alcance seus objetivos de estudo com mais<br />
+                facilidade. Nosso app gera um cronograma sob<br /> 
+                medida, otimizando o seu tempo e<br />
+                maximizando seus resultados.
                 </Text>
             </View>
             <View style={Estilo.container002}>
                 <Pressable>
-                <Link href={'/'}>
+                <Link href={'./pag2'}>
                 <Text style={Estilo.back}>Back</Text>
                 </Link>
                 </Pressable>
                 <Pressable>
-                <Link href={'./pag3'}>
+                <Link href={'./pag4'}>
                 <Text style={Estilo.next}>Next</Text>
                 </Link>
                 </Pressable>
