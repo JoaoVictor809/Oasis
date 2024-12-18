@@ -25,7 +25,6 @@ export default StyleSheet.create({
     },
     containerMain:{
         flex:1,
-        justifyContent:'center',
         alignItems:'center',
         paddingTop:200,
         display:'flex',
@@ -53,7 +52,8 @@ export default StyleSheet.create({
     container002:{
         display:'flex',
         flexDirection:'row',
-        justifyContent:'space-around'
-        
+        justifyContent:'space-between', // Mudança aqui
+        paddingHorizontal: 10,
+        marginBottom: 20,
     }
 })
