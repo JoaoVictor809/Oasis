@@ -1,4 +1,4 @@
-import { StyleSheet} from 'react-native'
+import {StyleSheet} from 'react-native'
 
 export default StyleSheet.create({
     container: {
@@ -30,7 +30,7 @@ export default StyleSheet.create({
         width:'100%',
         alignItems:'center',
         justifyContent:'center',
-        gap:"10%"
+        gap:"3%"
     },
     botao:{
         position: 'absolute',
@@ -47,7 +47,7 @@ export default StyleSheet.create({
         alignItems:"center"
     },
     input:{
-        height: 200,
+        height: 45,
         margin: 12,
         padding: 10,
         width:"75%",
@@ -61,6 +61,6 @@ export default StyleSheet.create({
         alignItems:"center",
         width:"100%",
         borderRadius:20,
-        backgroundColor:"#81B3FF"
+        backgroundColor:"#1261D7"
     }
 })

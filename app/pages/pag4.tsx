@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable, SafeAreaView} from 'react-native'
+import { View, Text, Image, Pressable, SafeAreaView, ImageBackground, TextInput } from 'react-native'
 import Estilo from '../../assets/style/pag4'
 import { Link } from "expo-router";
 import * as SplashScreen from 'expo-splash-screen';
@@ -7,7 +7,9 @@ import { useFonts } from "expo-font";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function pag4(){
+export default function pag4() {
+    const [text, onChangeText] = React.useState('');
+    const [number, onChangeNumber] = React.useState('');
     const [fontsLoaded] = useFonts({
         'MinhaFonte-Regular': require('../../assets/fonts/superOcean.ttf'),
         'Fonte-texto': require('../../assets/fonts/TitilliumWeb-Regular.ttf')
@@ -23,9 +25,63 @@ export default function pag4(){
         // Retorna null ou qualquer outra coisa enquanto a tela de splash ainda está visível.
         return null
     }
-    return(
-        <SafeAreaView>
-            <Text>teste</Text>
+    return (
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#1261D7" }}>
+            <View style={Estilo.container}>
+                <ImageBackground
+                    source={require('../../assets/images/forma001.png')}
+                    style={Estilo.forma001}
+                    resizeMode="contain"
+                />
+            </View>
+            <View style={Estilo.title}>
+                <View>
+                    <Text style={Estilo.txt}>Bem vindo<br />Novamente</Text>
+                </View>
+
+                <Text style={{ fontFamily: "Fonte-texto", color: "#fff", textAlign: "center" }}>Seu estudo personalizado está pronto. Faça <br />
+                    login para uma experiência de aprendizado <br />
+                    adaptada às suas necessidades!</Text>
+                <TextInput
+                    style={Estilo.input}
+                    onChangeText={onChangeText}
+                    value={text}
+                    placeholder="Email"
+                    keyboardType="numeric" />
+
+                <TextInput
+                    style={Estilo.input}
+                    onChangeText={onChangeText}
+                    value={number}
+                    placeholder="Senha"
+                    keyboardType="numeric" />
+                    <Pressable>
+                        <Link href={'/'}>
+                        <View style={Estilo.enter}>
+                            <Text style={{fontFamily:"MinhaFonte-Regular", color:"#fff", fontSize:20}}>Entrar</Text>
+                        </View>
+                        </Link>
+                        <Link  href={'/'}>
+                        <Text style={{fontFamily: "Fonte-texto", color: "#fff",}}>Esqueceu a senha</Text>
+                        </Link>
+                    </Pressable>
+            </View>
+            <View style={Estilo.container002}>
+                <ImageBackground
+                    source={require('../../assets/images/forma002.png')}
+                    style={Estilo.forma002}
+                    resizeMode="contain"
+                />
+            </View>
+            <View style={Estilo.botao}>
+                <Pressable>
+                    <Link href={'./pag5'}>
+                    <View style={Estilo.enter}>
+                            <Text style={{fontFamily:"MinhaFonte-Regular", color:"#fff", fontSize:20, paddingLeft:10, paddingRight:10}}>Cadastrar</Text>
+                        </View>
+                    </Link>
+                </Pressable>
+            </View>
         </SafeAreaView>
     )
 }
