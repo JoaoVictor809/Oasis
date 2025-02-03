@@ -55,7 +55,7 @@ export default function pag3() {
                 </Link>
                 </Pressable>
                 <Pressable>
-                <Link href={'./pag4'}>
+                <Link href={'./main'}>
                 <Text style={Estilo.next}>Next</Text>
                 </Link>
                 </Pressable>
