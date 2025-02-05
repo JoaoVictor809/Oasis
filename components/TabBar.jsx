@@ -3,13 +3,17 @@ import { useLinkBuilder, useTheme } from '@react-navigation/native';
 import { Text, PlatformPressable } from '@react-navigation/elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AntDesign } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { router } from 'expo-router';
 
 export default function TabBar({ state, descriptors, navigation }) {
     const icons = {
-        index: (props)=> <AntDesign name="home" size={24} color={greyColor} {...props} />,
-        cursos: (props)=> <AntDesign name="user" size={24} color={greyColor} {...props} />,
-        provas: (props)=> <AntDesign name="pluscircleo" size={24} color={greyColor} {...props} />
+        index: (props)=> <MaterialIcons name="home-filled" size={24} color={greyColor} {...props} />,
+        cursos: (props)=> <MaterialCommunityIcons name="bookshelf" size={24} color={greyColor} {...props} />,
+        provas: (props)=> <FontAwesome6 name="sheet-plastic" size={24} color={greyColor} {...props} />,
+        pag4: (props)=> <AntDesign name="user" size={24} color={greyColor} {...props} />
     }
     const { buildHref } = useLinkBuilder();
     const { colors } = useTheme();
