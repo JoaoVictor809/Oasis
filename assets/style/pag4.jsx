@@ -52,7 +52,8 @@ export default StyleSheet.create({
         padding: 10,
         width:"75%",
         borderRadius:20,
-        backgroundColor:"#585454af"
+        backgroundColor:"#585454af",
+        color:"#fff"
     },
     enter:{
         
