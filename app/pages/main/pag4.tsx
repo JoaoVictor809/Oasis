@@ -9,7 +9,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function pag4() {
     const [text, onChangeText] = React.useState('');
-    const [number, onChangeNumber] = React.useState('');
+    const [text01, onChangeText01] = React.useState('');
     const [fontsLoaded] = useFonts({
         'MinhaFonte-Regular': require('../../../assets/fonts/superOcean.ttf'),
         'Fonte-texto': require('../../../assets/fonts/TitilliumWeb-Regular.ttf')
@@ -47,14 +47,14 @@ export default function pag4() {
                     onChangeText={onChangeText}
                     value={text}
                     placeholder="Email"
-                    keyboardType="numeric" />
+                    keyboardType=".emailAddress" />
 
                 <TextInput
                     style={Estilo.input}
-                    onChangeText={onChangeText}
-                    value={number}
+                    onChangeText={onChangeText01}
+                    value={text01}
                     placeholder="Senha"
-                    keyboardType="numeric" />
+                    keyboardType="String" />
                     <Pressable>
                         <Link href={'/'}>
                         <View style={Estilo.enter}>
