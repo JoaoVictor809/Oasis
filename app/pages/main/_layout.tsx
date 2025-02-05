@@ -6,6 +6,7 @@ import TabBar from '../../../components/TabBar'
 export default function _layout() {
     return (
         <Tabs
+            
             tabBar={props => <TabBar {...props} />}
         >
             <Tabs.Screen

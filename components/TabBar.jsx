@@ -2,7 +2,7 @@ import { View, Platform, StyleSheet } from 'react-native';
 import { useLinkBuilder, useTheme } from '@react-navigation/native';
 import { Text, PlatformPressable } from '@react-navigation/elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
@@ -10,10 +10,10 @@ import { router } from 'expo-router';
 
 export default function TabBar({ state, descriptors, navigation }) {
     const icons = {
-        index: (props)=> <MaterialIcons name="home-filled" size={24} color={greyColor} {...props} />,
-        cursos: (props)=> <MaterialCommunityIcons name="bookshelf" size={24} color={greyColor} {...props} />,
-        provas: (props)=> <FontAwesome6 name="sheet-plastic" size={24} color={greyColor} {...props} />,
-        pag4: (props)=> <AntDesign name="user" size={24} color={greyColor} {...props} />
+        index: (props) => <MaterialIcons name="home-filled" size={24} color={greyColor} {...props} />,
+        cursos: (props) => <MaterialCommunityIcons name="bookshelf" size={24} color={greyColor} {...props} />,
+        provas: (props) => <FontAwesome6 name="sheet-plastic" size={24} color={greyColor} {...props} />,
+        pag4: (props) => <AntDesign name="user" size={24} color={greyColor} {...props} />
     }
     const { buildHref } = useLinkBuilder();
     const { colors } = useTheme();
@@ -30,7 +30,7 @@ export default function TabBar({ state, descriptors, navigation }) {
                             ? options.title
                             : route.name;
 
-                            if(['_sitemap', '+not-found'].includes(route.name)) return null;
+                if (['_sitemap', '+not-found'].includes(route.name)) return null;
 
                 const isFocused = state.index === index;
 
@@ -65,7 +65,7 @@ export default function TabBar({ state, descriptors, navigation }) {
                     >
                         {
                             icons[route.name]({
-                                color: isFocused?  activeColor: greyColor
+                                color: isFocused ? activeColor : greyColor
                             })
                         }
                         <Text style={{ color: isFocused ? 'activeColor' : greyColor }}>
@@ -79,24 +79,24 @@ export default function TabBar({ state, descriptors, navigation }) {
 }
 
 const styles = StyleSheet.create({
-    tabbar:{
+    tabbar: {
         position: 'relative',
         bottom: 25,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        alignItems:'center',
+        alignItems: 'center',
         backgroundColor: '#fff',
         marginHorizontal: 20,
         paddingVertical: 15,
         borderRadius: 20,
         borderCurve: 'continuous',
         shadowColor: '#000',
-        shadowOffset: {width:0 , height:10},
-        shadowRadius: 10, 
+        shadowOffset: { width: 0, height: 10 },
+        shadowRadius: 10,
         shadowOpacity: 0.1
     },
-    tabbarItem:{
-        flex:1,
+    tabbarItem: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     }
