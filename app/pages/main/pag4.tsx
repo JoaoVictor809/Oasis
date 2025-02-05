@@ -42,7 +42,7 @@ export default function pag4() {
                 <Text style={{ fontFamily: "Fonte-texto", color: "#fff", textAlign: "center" }}>Seu estudo personalizado está pronto. Faça <br />
                     login para uma experiência de aprendizado <br />
                     adaptada às suas necessidades!</Text>
-                <TextInput
+                <TextInput 
                     style={Estilo.input}
                     onChangeText={onChangeText}
                     value={text}
@@ -54,7 +54,9 @@ export default function pag4() {
                     onChangeText={onChangeText01}
                     value={text01}
                     placeholder="Senha"
-                    keyboardType="String" />
+                    keyboardType="String"
+                    // oq deixa os caracteres em .
+                    secureTextEntry={true}  /> 
                     <Pressable>
                         <Link href={'/'}>
                         <View style={Estilo.enter}>
