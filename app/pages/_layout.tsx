@@ -4,9 +4,8 @@ export default function RootLayout() {
   return <Stack
   screenOptions={{ headerShown: false, title: " " }}>;
   <Stack.Screen 
-  name='index'
+  name='pag2'
                 options={{
-                    
                     headerShown: false
                 }}
   />

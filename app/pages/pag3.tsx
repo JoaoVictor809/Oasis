@@ -27,39 +27,39 @@ export default function pag3() {
     }
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <View style={{flex:1}}>
-            <ImageBackground>
-                <View style={Estilo.fundo001}>
-                    <ImageBackground source={require('../../assets/images/forma004.png')} />
-                </View>
+            <View style={{ flex: 1 }}>
+                <ImageBackground>
+                    <View style={Estilo.fundo001}>
+                        <ImageBackground source={require('../../assets/images/forma004.png')} />
+                    </View>
 
-                <View style={Estilo.fundo002}>
-                    <ImageBackground style={Estilo.forma002} source={require('../../assets/images/forma003.png')} />
-                </View>
-            </ImageBackground>
+                    <View style={Estilo.fundo002}>
+                        <ImageBackground style={Estilo.forma002} source={require('../../assets/images/forma003.png')} />
+                    </View>
+                </ImageBackground>
 
-            <View style={Estilo.containerMain}>
-                <Image source={require('../../assets/images/cronograma.png')} />
-                <Text style={Estilo.txt}>Cronograma único</Text>
-                <Text style={Estilo.txt002}>
-                Alcance seus objetivos de estudo com mais<br />
-                facilidade. Nosso app gera um cronograma sob<br /> 
-                medida, otimizando o seu tempo e<br />
-                maximizando seus resultados.
-                </Text>
-            </View>
-            <View style={Estilo.container002}>
-                <Pressable>
-                <Link href={'./pag2'}>
-                <Text style={Estilo.back}>Back</Text>
-                </Link>
-                </Pressable>
-                <Pressable>
-                <Link href={'./main'}>
-                <Text style={Estilo.next}>Next</Text>
-                </Link>
-                </Pressable>
-            </View>
+                <View style={Estilo.containerMain}>
+                    <Image source={require('../../assets/images/cronograma.png')} />
+                    <Text style={Estilo.txt}>Cronograma único</Text>
+                    <Text style={Estilo.txt002}>
+                        Alcance seus objetivos de estudo com mais<br />
+                        facilidade. Nosso app gera um cronograma sob<br />
+                        medida, otimizando o seu tempo e<br />
+                        maximizando seus resultados.
+                    </Text>
+                </View>
+                <View style={Estilo.container002}>
+                    <Pressable>
+                        <Link href={'./pag2'}>
+                            <Text style={Estilo.back}>Back</Text>
+                        </Link>
+                    </Pressable>
+                    <Pressable>
+                        <Link href={'./main'}>
+                            <Text style={Estilo.next}>Next</Text>
+                        </Link>
+                    </Pressable>
+                </View>
             </View>
         </SafeAreaView>
     )
