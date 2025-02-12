@@ -1,6 +1,6 @@
 import { Text, View, SafeAreaView, ImageBackground,Image, Pressable } from "react-native";
 import { Link } from "expo-router";
-import Estilo from '../assets/style/index'
+import Estilo from '../assets/style/indexSplash'
 
 export default function Index() {
   return (
@@ -24,7 +24,7 @@ export default function Index() {
       </View>
       <View style={Estilo.botao}>
         <Pressable>
-        <Link href={'./pages/pag2'}>
+        <Link href={'./pages/splashInfo001'}>
         <Image source={require('../assets/images/botao001.png')}/>
         </Link>
         </Pressable>

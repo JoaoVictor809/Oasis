@@ -13,7 +13,7 @@ export default function TabBar({ state, descriptors, navigation }) {
         index: (props) => <MaterialIcons name="home-filled" size={24} color={greyColor} {...props} />,
         cursos: (props) => <MaterialCommunityIcons name="bookshelf" size={24} color={greyColor} {...props} />,
         provas: (props) => <FontAwesome6 name="sheet-plastic" size={24} color={greyColor} {...props} />,
-        pag4: (props) => <AntDesign name="user" size={24} color={greyColor} {...props} />
+        login: (props) => <AntDesign name="user" size={24} color={greyColor} {...props} />
     }
     const { buildHref } = useLinkBuilder();
     const { colors } = useTheme();
