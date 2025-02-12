@@ -7,7 +7,7 @@ export default function index(){
     return(
         
         <View>
-            <ColorList color="#0891b2" />
+            
         </View>
     )
 }
