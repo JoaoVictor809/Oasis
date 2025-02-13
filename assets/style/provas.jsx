@@ -13,6 +13,12 @@ export default StyleSheet.create ({
     padding: 10,
     backgroundColor:"#585454af",
     borderRadius:20,
-    border:"none"
+    border:"none",
+    color: '#fff',
+    fontFamily: 'Poppins_Regular'
     },
+    title:{
+        color:'#fff',
+        fontFamily: 'Poppins_Bold'
+    }
 })
