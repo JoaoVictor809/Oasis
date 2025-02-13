@@ -9,16 +9,20 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { router } from 'expo-router';
 
 export default function TabBar({ state, descriptors, navigation }) {
+    const greyColor = '#737373';
+    const activeColor = '#1261D7';
+
+    // Definindo os ícones
     const icons = {
         index: (props) => <MaterialIcons name="home-filled" size={24} color={greyColor} {...props} />,
         cursos: (props) => <MaterialCommunityIcons name="bookshelf" size={24} color={greyColor} {...props} />,
         provas: (props) => <FontAwesome6 name="sheet-plastic" size={24} color={greyColor} {...props} />,
         login: (props) => <AntDesign name="user" size={24} color={greyColor} {...props} />
-    }
+    };
+
     const { buildHref } = useLinkBuilder();
     const { colors } = useTheme();
-    const greyColor = '#737373'
-    const activeColor = '#1261D7'
+
     return (
         <View style={styles.tabbar}>
             {state.routes.map((route, index) => {
@@ -53,6 +57,13 @@ export default function TabBar({ state, descriptors, navigation }) {
                     });
                 };
 
+                // Garantir que o ícone exista e seja uma função
+                const Icon = icons[route.name];
+                if (!Icon) {
+                    console.warn(`Ícone não encontrado para a rota: ${route.name}`);
+                    return null;
+                }
+
                 return (
                     <PlatformPressable
                         href={buildHref(route.name, route.params)}
@@ -63,19 +74,18 @@ export default function TabBar({ state, descriptors, navigation }) {
                         onLongPress={onLongPress}
                         style={styles.tabbarItem}
                     >
-                        {
-                            icons[route.name]({
-                                color: isFocused ? activeColor : greyColor
-                            })
-                        }
-                        <Text style={{ color: isFocused ? 'activeColor' : greyColor }}>
+                        {/* Renderizando o ícone */}
+                        <Icon
+                            color={isFocused ? activeColor : greyColor}
+                        />
+                        <Text style={{ color: isFocused ? activeColor : greyColor }}>
                             {label}
                         </Text>
                     </PlatformPressable>
                 );
             })}
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -100,4 +110,4 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     }
-})
+});
