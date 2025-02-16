@@ -15,10 +15,34 @@ export default StyleSheet.create ({
     borderRadius:20,
     border:"none",
     color: '#fff',
-    fontFamily: 'Poppins_Regular'
+    fontFamily: 'Poppins_Regular',
+    width:'100%',
     },
     title:{
         color:'#fff',
-        fontFamily: 'Poppins_Bold'
+        fontFamily: 'Poppins_Bold',
+        paddingLeft:12
+    },
+    boxSearch:{
+        display:'flex',
+        flexDirection:'row',
+        paddingBottom:30
+    },
+    imgSearch:{
+        position:'absolute',
+        top: 20,
+        right:25,
+        cursor:'pointer'
+    },
+    header:{
+        display:'flex',
+    },
+    containerMain:{
+        width:'100%',
+        backgroundColor:'#fff',
+        borderTopLeftRadius:50
+    },
+    containerEenm:{
+        paddingTop:50
     }
 })

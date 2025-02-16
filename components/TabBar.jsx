@@ -90,8 +90,10 @@ export default function TabBar({ state, descriptors, navigation }) {
 
 const styles = StyleSheet.create({
     tabbar: {
-        position: 'relative',
-        bottom: 25,
+        position: 'absolute',  
+        bottom: 30,  
+        left: 0, 
+        right: 0, 
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
@@ -99,12 +101,12 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         paddingVertical: 15,
         borderRadius: 20,
-        borderCurve: 'continuous',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 10 },
         shadowRadius: 10,
         shadowOpacity: 0.1
     },
+    
     tabbarItem: {
         flex: 1,
         justifyContent: 'center',
