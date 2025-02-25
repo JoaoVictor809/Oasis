@@ -1,9 +1,12 @@
-import { View, Text, TextInput, Pressable, Image, ScrollView, Dimensions, ImageBackground } from "react-native"
+import { View, Text, TextInput, Pressable, Image, ScrollView, Dimensions, ImageBackground, StyleSheet } from "react-native"
 import React from "react"
 import { useFonts } from "expo-font";
 import { useState, useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import Estilo from '../../../assets/style/curso'
+import Slider from "@/components/Slider";
+import { ImageSlider } from '@/data/SliderData'
+import ListCurso001 from '@/components/curso/curso001'
 
 //pega a altura 
 const { height } = Dimensions.get('window');
@@ -52,6 +55,14 @@ export default function curso() {
                 </View>
                 <View style={[Estilo.containerMain, { height }]}>
 
+                    <View style={styles.Container}>
+                        <Slider itemList={ImageSlider} />
+                    </View>
+
+                    <View>
+                        <ListCurso001 />
+                    </View>
+                    
 
                 </View>
 
@@ -60,3 +71,10 @@ export default function curso() {
 
     )
 }
+
+const styles = StyleSheet.create({
+    Container: {
+
+        paddingTop: 60
+    }
+})
