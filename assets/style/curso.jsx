@@ -45,6 +45,14 @@ export default StyleSheet.create({
         containerMain:{
             width:'100%',
             backgroundColor:'#fff',
-            borderTopLeftRadius:50
+            borderTopLeftRadius:50,
+            gap:30
         },
+        titleCurso001:{
+            fontFamily: 'Poppins_Bold',
+            fontSize:25
+        },
+        containerCurso001:{
+            alignItems:'center'
+        }
 })
