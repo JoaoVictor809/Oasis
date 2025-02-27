@@ -4,6 +4,7 @@ import { Link } from "expo-router";
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useState, useEffect } from 'react';
 import { useFonts } from "expo-font";
+import { Stack, useRouter } from "expo-router";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -25,6 +26,7 @@ export default function pag4() {
         // Retorna null ou qualquer outra coisa enquanto a tela de splash ainda está visível.
         return null
     }
+    const router = useRouter();
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#1261D7" }}>
             <View style={Estilo.container}>
@@ -68,6 +70,17 @@ export default function pag4() {
                         </Link>
                     </Pressable>
             </View>
+            <View style={Estilo.botao}>
+            <Pressable onPress={() => router.push('./register')}>
+               
+               <View style={Estilo.enter}>
+                       <Text style={{fontFamily:"MinhaFonte-Regular", color:"#fff", fontSize:20, paddingLeft:10, paddingRight:10}}>Cadastrar</Text>
+                   </View>
+              
+           </Pressable>
+       
+            </View>
+            
             <View style={Estilo.container002}>
                 <ImageBackground
                     source={require('../../../assets/images/forma002.png')}
@@ -75,15 +88,7 @@ export default function pag4() {
                     resizeMode="contain"
                 />
             </View>
-            <View style={Estilo.botao}>
-                <Pressable>
-                    <Link href={'/'}>
-                    <View style={Estilo.enter}>
-                            <Text style={{fontFamily:"MinhaFonte-Regular", color:"#fff", fontSize:20, paddingLeft:10, paddingRight:10}}>Cadastrar</Text>
-                        </View>
-                    </Link>
-                </Pressable>
-            </View>
+            
         </SafeAreaView>
     )
 }
