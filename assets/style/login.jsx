@@ -34,8 +34,9 @@ export default StyleSheet.create({
     },
     botao:{
         position: 'absolute',
-        bottom: 35,
+        bottom:150,
         right:20,
+        zIndex:1
     },
     txt:{
         fontSize:25,
@@ -60,8 +61,9 @@ export default StyleSheet.create({
         height: 45,
         justifyContent:"center",
         alignItems:"center",
-        width:"100%",
+        width:'100%',
         borderRadius:20,
-        backgroundColor:"#81B3FF"
+        backgroundColor:"#81B3FF",
+       
     }
 })
