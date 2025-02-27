@@ -32,7 +32,7 @@ export default function curso() {
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={Estilo.formaImg}>
                 <ImageBackground
-                    source={require('../../../assets/images/formas/formaCurso001.png')} />
+                    source={require('@/assets/images/formas/formaCurso001.png')} />
             </View>
             <View style={Estilo.main}>
                 <View style={Estilo.header}>
@@ -48,7 +48,7 @@ export default function curso() {
                             keyboardType="emailAddress" />
                         <View style={Estilo.imgSearch}>
                             <Pressable>
-                                <Image source={require('../../../assets/images/lupa.png')} />
+                                <Image source={require('@/assets/images/lupa.png')} />
                             </Pressable>
                         </View>
                     </View>
