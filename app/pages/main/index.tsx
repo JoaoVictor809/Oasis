@@ -25,49 +25,70 @@ export default function Index() {
       return null;
   }
 
+  const router = useRouter();
 
-    const router = useRouter();
+  const buttonsData = [
+      { image: require("@/assets/images/logotipo-provas/enem.svg"), route: "/pages/main/pagesRoot/vestibularPageEnem" },
+      { image: require("@/assets/images/logotipo-provas/vunesp.svg"), route: "/pages/main/pagesRoot/vestibularPageVunesp" },
+      { image: require("@/assets/images/logotipo-provas/usp.svg"), route: "/pages/main/pagesRoot/vestibularPageUsp" },
+  ];
 
-    const renderButtons = () => (
-        <View style={StyleOfIndex.infoTestBottons}>
-            {[...Array(4)].map((_, index) => (
-                <Pressable 
-                    key={index} 
-                    style={StyleOfIndex.button} 
-                    onPress={() => router.push("/pages/main/pagesRoot/vestibularPage")}
-                >
-                    <Image 
-                        source={require("@/assets/images/logotipo-provas/enem.svg")} 
-                        style={StyleOfIndex.buttonImage} 
-                    />
-                </Pressable>
-            ))}
-        </View>
-    );
+  const buttonDataConcursos =[ 
+    { image: require("@/assets/images/logotipo-provas/correios.jpg"), route: "/pages/main/provas" },
+    { image: require("@/assets/images/logotipo-provas/BB.png"), route: "/pages/main/provas" },
+    { image: require("@/assets/images/logotipo-provas/caixa.png"), route: "/pages/main/provas" },
+    { image: require("@/assets/images/logotipo-provas/pm.png"), route: "/pages/main/provas" },
+  ];
 
-    return (
-        <ScrollView style={StyleOfIndex.background} contentContainerStyle={{ paddingBottom: 20 }}>
-            <View style={StyleOfIndex.container}>
-                <Text style={StyleOfIndex.mainTitle}>Vestibulares</Text>
-                <Text style={StyleOfIndex.subtitle}>Os vestibulares mais concorridos</Text>
-                {renderButtons()}
+  const renderButtons = () => (
+      <View style={StyleOfIndex.infoTestBottons}>
+          {buttonsData.map((button, index) => (
+              <Pressable 
+                  key={index} 
+                  style={StyleOfIndex.button} 
+                  onPress={() => router.push(button.route)}
+              >
+                  <Image 
+                      source={button.image} 
+                      style={StyleOfIndex.buttonImage} 
+                  />
+              </Pressable>
+          ))}
+      </View>
+  );
 
-                <Text style={StyleOfIndex.mainTitle}>Seus cursos</Text>
-                <Text style={StyleOfIndex.subtitle}>Clique para ver todos os cursos</Text>
-                <View style={StyleOfIndex.imageHyperLink}>
-                    <Image 
-                        source={require("@/assets/images/logotipo-provas/image3.png")} 
-                        style={StyleOfIndex.image} 
-                    />
-                </View>
+  return (
+      <ScrollView style={StyleOfIndex.background} contentContainerStyle={{ paddingBottom: 20 }}>
+          <View style={StyleOfIndex.container}>
+              <Text style={StyleOfIndex.mainTitle}>Vestibulares</Text>
+              <Text style={StyleOfIndex.subtitle}>Os vestibulares mais concorridos</Text>
+              {renderButtons()}
 
-                <Text style={StyleOfIndex.mainTitle}>Cursos</Text>
-                <Text style={StyleOfIndex.subtitle}>Os vestibulares mais concorridos</Text>
-                {renderButtons()}
+              <Text style={StyleOfIndex.mainTitle}>Seus cursos</Text>
+              <Text style={StyleOfIndex.subtitle}>Clique para ver todos os cursos</Text>
+              <View style={StyleOfIndex.imageHyperLink}>
+                  <Image 
+                      source={require("@/assets/images/logotipo-provas/image3.png")} 
+                      style={StyleOfIndex.image} 
+                  />
+              </View>
 
-                <Text style={StyleOfIndex.subtitlePrincipal}>Os concursos mais concorridos</Text>
-                {renderButtons()}
-            </View>
-        </ScrollView>
-    );
+              <Text style={StyleOfIndex.subtitlePrincipal}>Os concursos mais concorridos</Text>
+              <View style={StyleOfIndex.infoTestBottons}>
+                  {buttonDataConcursos.map((button, index) => (
+                      <Pressable 
+                          key={index} 
+                          style={StyleOfIndex.button} 
+                          onPress={() => router.push(button.route)}
+                      >
+                          <Image 
+                              source={button.image} 
+                              style={StyleOfIndex.buttonImage} 
+                          />
+                      </Pressable>
+                  ))}
+              </View>
+          </View>
+      </ScrollView>
+  );
 }
