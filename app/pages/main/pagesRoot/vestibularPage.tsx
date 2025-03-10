@@ -24,6 +24,13 @@ export default function VestibularScreen() {
 
     return (
         <ScrollView style={StyleOfVestibular.background} contentContainerStyle={{ paddingBottom: 20 }}>
+            <View style={StyleOfVestibular.header}>
+                <Image style={{width:30, height:30}} source={require('@/assets/images/Back.png')}/>
+                <View style={StyleOfVestibular.headerTitle}>
+                    <Text style={{fontFamily:'Poppins_Bold', color:'#fff', fontSize:20}}>Enem</Text>
+                    <Text style={{fontFamily:'Poppins_Regular', color:'#fff', fontSize:15}}>-Exame Nacional do Ensino Médio</Text>
+                </View>
+            </View>
             <View style={StyleOfVestibular.container}>
                 <Image
                     source={require("@/assets/images/logotipo-provas/image3.png")}
