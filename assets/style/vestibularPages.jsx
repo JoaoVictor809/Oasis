@@ -54,4 +54,21 @@ export default StyleSheet.create({
         textAlign: 'left',
         marginBottom: 5,
     },
+    header:{
+        width:'100%',
+        backgroundColor:'#1261D7',
+        borderBottomLeftRadius:20,
+        borderBottomRightRadius:20,
+        display:'flex',
+        flexDirection:'row',
+        height:60,
+        alignItems:'center',
+        justifyContent:'space-around'
+    },
+    headerTitle:{
+        display:'flex',
+        flexDirection:'row',
+        alignItems:'center',
+        gap:10
+    }
 });
