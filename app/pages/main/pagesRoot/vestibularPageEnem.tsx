@@ -1,13 +1,19 @@
-import { View, Text, Pressable, Image, ScrollView } from "react-native";
-import React, { useEffect } from "react";
+import { View, Text, Pressable, Image, ScrollView, Button } from "react-native";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import StyleOfVestibular from "@/assets/style/vestibularPages";
 import { Link } from "expo-router";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import BottomSheet from '@gorhom/bottom-sheet';
+
 
 SplashScreen.preventAutoHideAsync();
 
 export default function VestibularScreen() {
+    const bottomSheetref= useRef(null);
+    const snapPoints = useMemo(() => ["30%", "80%"], [])
+
     const [fontsLoaded] = useFonts({
         'Poppins_Regular': require('../../../../assets/fonts/poppins/Poppins-Regular.ttf'),
         'Poppins_Bold': require('../../../../assets/fonts/poppins/Poppins-Bold.ttf'),
@@ -24,7 +30,7 @@ export default function VestibularScreen() {
     }
 
     return (
-        
+        <GestureHandlerRootView style={{flex:1}}>
         <View style={StyleOfVestibular.background}>
             <View style={StyleOfVestibular.header}>
                 <Pressable>
@@ -95,5 +101,17 @@ export default function VestibularScreen() {
                 </View>
             </ScrollView>
         </View>
+        <BottomSheet
+        ref={bottomSheetref}
+        index={1}
+        snapPoints={snapPoints}
+        backgroundStyle={{backgroundColor:'#fff'}}
+        >
+            <View >
+               <Text>texto</Text> 
+               <Button title="gerar" onPress={()=>{}}/>
+            </View>
+        </BottomSheet>
+        </GestureHandlerRootView>
     );
 }
