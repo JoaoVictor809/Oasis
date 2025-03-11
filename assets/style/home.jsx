@@ -46,7 +46,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#1261D7',
-        marginRight: 10, // Espaço entre os botões
+        marginRight: 10, 
         marginBottom: 10, 
         
     },
@@ -60,7 +60,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap', 
         alignItems: 'flex-start',
-        marginBottom: 20, 
+        width:'100%',
         gap:30,
     },
     imageHyperLink: {

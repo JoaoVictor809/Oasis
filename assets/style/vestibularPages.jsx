@@ -4,8 +4,7 @@ export default StyleSheet.create({
     background: {
         flex: 1,
         backgroundColor: '#f5f5f5',
-        padding: 10,
-        marginBottom:40,   
+        marginBottom: 40,
     },
     container: {
         padding: 20,
@@ -24,7 +23,7 @@ export default StyleSheet.create({
         elevation: 5,
     },
     image: {
-        width: 120, // Ajuste para dispositivos móveis
+        width: 120, 
         height: 120,
         resizeMode: 'contain',
         marginBottom: 15,
@@ -36,11 +35,11 @@ export default StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center',
     },
-    secondaryText:{
+    secondaryText: {
         fontSize: 18,
         fontWeight: '700',
         fontFamily: "Poppins_Bold",
-        color:'#1261D7',
+        color: '#1261D7',
         marginBottom: 15,
         textAlign: 'center',
         textTransform: "uppercase",
@@ -50,11 +49,11 @@ export default StyleSheet.create({
         fontWeight: '600',
         color: '#1261D7',
         marginBottom: 18,
-        padding:8,
-        paddingHorizontal:20,
+        padding: 8,
+        paddingHorizontal: 20,
         textAlign: 'center',
-        backgroundColor:'#BAD6FF',
-        borderRadius:20,
+        backgroundColor: '#BAD6FF',
+        borderRadius: 20,
     },
     paragraph: {
         fontSize: 16,
@@ -63,5 +62,21 @@ export default StyleSheet.create({
         textAlign: 'justify',
         marginBottom: 25,
     },
-
+    header: {
+        width: '100%',
+        backgroundColor: '#1261D7',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        display: 'flex',
+        flexDirection: 'row',
+        height: 60,
+        alignItems: 'center',
+        justifyContent: 'space-around'
+    },
+    headerTitle: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10
+    }
 });
