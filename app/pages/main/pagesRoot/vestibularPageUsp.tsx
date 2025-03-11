@@ -1,5 +1,6 @@
 import { View, Text, Pressable, Image, ScrollView } from "react-native";
 import React, { useEffect } from "react";
+import { Link } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import StyleOfVestibular from "@/assets/style/vestibularPages";
@@ -24,6 +25,17 @@ export default function VestibularScreen() {
 
     return (
         <View style={StyleOfVestibular.background}>
+            <View style={StyleOfVestibular.header}>
+                <Pressable>
+                    <Link href={'../'}>
+                    <Image style={{width:30, height:30}} source={require('@/assets/images/Back.png')}/>
+                    </Link>
+                </Pressable>
+                <View style={StyleOfVestibular.headerTitle}>
+                    <Text style={{fontFamily:'Poppins_Bold', color:'#fff', fontSize:20}}>Enem</Text>
+                    <Text style={{fontFamily:'Poppins_Regular', color:'#fff', fontSize:15}}>-Exame Nacional do Ensino Médio</Text>
+                </View>
+            </View>
             <ScrollView 
                 style={StyleOfVestibular.background} 
                 contentContainerStyle={{ paddingBottom: 20 }}

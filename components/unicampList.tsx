@@ -23,7 +23,7 @@ export default function unicampList(){
     return(
         <View>
             <Text style={styles.title}>Unicamp</Text>
-            <ScrollView horizontal={true} style={styles.container}>
+            <ScrollView horizontal={true} style={styles.container} showsHorizontalScrollIndicator={false}>
                 <View style={styles.imageContainer}>
                      <Image source={require('../assets/images/unicamp/unicamp2023.png')} />
                 </View>

@@ -23,7 +23,7 @@ export default function enemList(){
     return(
         <View>
             <Text style={styles.title}>Enem</Text>
-            <ScrollView horizontal={true} style={styles.container}>
+            <ScrollView horizontal={true} style={styles.container} showsHorizontalScrollIndicator={false}>
                 <View style={styles.imageContainer}>
                      <Image source={require('../assets/images/enem/enem2023.png')} />
                 </View>

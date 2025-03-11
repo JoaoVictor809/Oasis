@@ -23,7 +23,7 @@ export default function bdbList() {
     return (
         <View>
             <Text style={styles.title}>Banco do brasil</Text>
-            <ScrollView horizontal={true} style={styles.container}>
+            <ScrollView horizontal={true} style={styles.container} showsHorizontalScrollIndicator={false}>
                 <View style={styles.imageContainer}>
                     <Image source={require('@/assets/images/banco do brasil/bdb2020.png')} />
                 </View>
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     container: {
         padding: 8,
         margin: 10,
+        borderWidth:0
     },
     imageContainer: {
         marginRight: 16,

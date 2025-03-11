@@ -9,86 +9,92 @@ import StyleOfIndex from "../../../assets/style/home";
 SplashScreen.preventAutoHideAsync();
 
 export default function Index() {
-  const [text, onChangeText] = React.useState('');
-  const [fontsLoaded] = useFonts({
-      'Poppins_Regular': require('../../../assets/fonts/poppins/Poppins-Regular.ttf'),
-      'Poppins_Bold': require('../../../assets/fonts/poppins/Poppins-Bold.ttf')
-  });
+    const [text, onChangeText] = React.useState('');
+    const [fontsLoaded] = useFonts({
+        'Poppins_Regular': require('../../../assets/fonts/poppins/Poppins-Regular.ttf'),
+        'Poppins_Bold': require('../../../assets/fonts/poppins/Poppins-Bold.ttf')
+    });
 
-  useEffect(() => {
-      if (fontsLoaded) {
-          SplashScreen.hideAsync();
-      }
-  }, [fontsLoaded]);
+    useEffect(() => {
+        if (fontsLoaded) {
+            SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-      return null;
-  }
+    if (!fontsLoaded) {
+        return null;
+    }
 
-  const router = useRouter();
+    const router = useRouter();
 
-  const buttonsData = [
-      { image: require("@/assets/images/logotipo-provas/enem.svg"), route: "/pages/main/pagesRoot/vestibularPageEnem" },
-      { image: require("@/assets/images/logotipo-provas/vunesp.svg"), route: "/pages/main/pagesRoot/vestibularPageVunesp" },
-      { image: require("@/assets/images/logotipo-provas/usp.svg"), route: "/pages/main/pagesRoot/vestibularPageUsp" },
-  ];
+    const buttonsData = [
+        { image: require("@/assets/images/logotipo-provas/enem.svg"), route: "/pages/main/pagesRoot/vestibularPageEnem" },
+        { image: require("@/assets/images/logotipo-provas/vunesp.svg"), route: "/pages/main/pagesRoot/vestibularPageVunesp" },
+        { image: require("@/assets/images/logotipo-provas/usp.svg"), route: "/pages/main/pagesRoot/vestibularPageUsp" },
+    ];
 
-  const buttonDataConcursos =[ 
-    { image: require("@/assets/images/logotipo-provas/correios.jpg"), route: "/pages/main/provas" },
-    { image: require("@/assets/images/logotipo-provas/BB.png"), route: "/pages/main/provas" },
-    { image: require("@/assets/images/logotipo-provas/caixa.png"), route: "/pages/main/provas" },
-    { image: require("@/assets/images/logotipo-provas/pm.png"), route: "/pages/main/provas" },
-  ];
+    const buttonDataConcursos = [
+        { image: require("@/assets/images/logotipo-provas/correios.jpg"), route: "/pages/main/provas" },
+        { image: require("@/assets/images/logotipo-provas/BB.png"), route: "/pages/main/provas" },
+        { image: require("@/assets/images/logotipo-provas/caixa.png"), route: "/pages/main/provas" },
+        { image: require("@/assets/images/logotipo-provas/pm.png"), route: "/pages/main/provas" },
+    ];
 
-  const renderButtons = () => (
-      <View style={StyleOfIndex.infoTestBottons}>
-          {buttonsData.map((button, index) => (
-              <Pressable 
-                  key={index} 
-                  style={StyleOfIndex.button} 
-                  onPress={() => router.push(button.route)}
-              >
-                  <Image 
-                      source={button.image} 
-                      style={StyleOfIndex.buttonImage} 
-                  />
-              </Pressable>
-          ))}
-      </View>
-  );
+    const renderButtons = () => (
+        <ScrollView horizontal={true} style={{ borderWidth: 0 }} showsHorizontalScrollIndicator={false}>
+            <View style={StyleOfIndex.infoTestBottons}>
+                {buttonsData.map((button, index) => (
+                    <Pressable
+                        key={index}
+                        style={StyleOfIndex.button}
+                        onPress={() => router.push(button.route)}
+                    >
+                        <Image
+                            source={button.image}
+                            style={StyleOfIndex.buttonImage}
+                        />
+                    </Pressable>
+                ))}
+            </View>
+        </ScrollView>
 
-  return (
-      <ScrollView style={StyleOfIndex.background} contentContainerStyle={{ paddingBottom: 20 }}>
-          <View style={StyleOfIndex.container}>
-              <Text style={StyleOfIndex.mainTitle}>Vestibulares</Text>
-              <Text style={StyleOfIndex.subtitle}>Os vestibulares mais concorridos</Text>
-              {renderButtons()}
+    );
 
-              <Text style={StyleOfIndex.mainTitle}>Seus cursos</Text>
-              <Text style={StyleOfIndex.subtitle}>Clique para ver todos os cursos</Text>
-              <View style={StyleOfIndex.imageHyperLink}>
-                  <Image 
-                      source={require("@/assets/images/logotipo-provas/image3.png")} 
-                      style={StyleOfIndex.image} 
-                  />
-              </View>
+    return (
+        <ScrollView style={StyleOfIndex.background} contentContainerStyle={{ paddingBottom: 20 }}>
+            <View style={StyleOfIndex.container}>
+                <Text style={StyleOfIndex.mainTitle}>Vestibulares</Text>
+                <Text style={StyleOfIndex.subtitle}>Os vestibulares mais concorridos</Text>
 
-              <Text style={StyleOfIndex.subtitlePrincipal}>Os concursos mais concorridos</Text>
-              <View style={StyleOfIndex.infoTestBottons}>
-                  {buttonDataConcursos.map((button, index) => (
-                      <Pressable 
-                          key={index} 
-                          style={StyleOfIndex.button} 
-                          onPress={() => router.push(button.route)}
-                      >
-                          <Image 
-                              source={button.image} 
-                              style={StyleOfIndex.buttonImage} 
-                          />
-                      </Pressable>
-                  ))}
-              </View>
-          </View>
-      </ScrollView>
-  );
+                {renderButtons()}
+
+                <Text style={StyleOfIndex.mainTitle}>Seus cursos</Text>
+                <Text style={StyleOfIndex.subtitle}>Clique para ver todos os cursos</Text>
+                <View style={StyleOfIndex.imageHyperLink}>
+                    <Image
+                        source={require("@/assets/images/logotipo-provas/image3.png")}
+                        style={StyleOfIndex.image}
+                    />
+                </View>
+
+                <Text style={StyleOfIndex.subtitlePrincipal}>Os concursos mais concorridos</Text>
+                <ScrollView horizontal={true} style={{ paddingBottom: 80, borderWidth: 0 }} showsHorizontalScrollIndicator={false}>
+                    <View style={StyleOfIndex.infoTestBottons}>
+                        {buttonDataConcursos.map((button, index) => (
+                            <Pressable
+                                key={index}
+                                style={StyleOfIndex.button}
+                                onPress={() => router.push(button.route)}
+                            >
+                                <Image
+                                    source={button.image}
+                                    style={StyleOfIndex.buttonImage}
+                                />
+                            </Pressable>
+                        ))}
+                    </View>
+                </ScrollView>
+            </View>
+        </ScrollView>
+    );
 }

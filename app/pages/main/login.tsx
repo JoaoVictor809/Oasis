@@ -44,43 +44,43 @@ export default function pag4() {
                 <Text style={{ fontFamily: "Fonte-texto", color: "#fff", textAlign: "center" }}>Seu estudo personalizado está pronto. Faça <br />
                     login para uma experiência de aprendizado <br />
                     adaptada às suas necessidades!</Text>
-                <TextInput 
+                <TextInput
                     style={Estilo.input}
                     onChangeText={onChangeText}
                     value={text}
                     placeholder="Email"
-                    keyboardType=".emailAddress" />
+                    keyboardType="email-address"  
+                />
 
                 <TextInput
                     style={Estilo.input}
                     onChangeText={onChangeText01}
                     value={text01}
                     placeholder="Senha"
-                    keyboardType="String"
-                    // oq deixa os caracteres em .
-                    secureTextEntry={true}  /> 
-                    <Pressable>
-                        <Link href={'/'}>
+                    keyboardType="default" 
+                    secureTextEntry={true} />
+                <Pressable>
+                    <Link href={'/'}>
                         <View style={Estilo.enter}>
-                            <Text style={{fontFamily:"MinhaFonte-Regular", color:"#fff", fontSize:20}}>Entrar</Text>
+                            <Text style={{ fontFamily: "MinhaFonte-Regular", color: "#fff", fontSize: 20 }}>Entrar</Text>
                         </View>
-                        </Link>
-                        <Link  href={'/'}>
-                        <Text style={{fontFamily: "Fonte-texto", color: "#fff",}}>Esqueceu a senha</Text>
-                        </Link>
-                    </Pressable>
+                    </Link>
+                    <Link href={'/'}>
+                        <Text style={{ fontFamily: "Fonte-texto", color: "#fff", }}>Esqueceu a senha</Text>
+                    </Link>
+                </Pressable>
             </View>
             <View style={Estilo.botao}>
-            <Pressable onPress={() => router.push('./register')}>
-               
-               <View style={Estilo.enter}>
-                       <Text style={{fontFamily:"MinhaFonte-Regular", color:"#fff", fontSize:20, paddingLeft:10, paddingRight:10}}>Cadastrar</Text>
-                   </View>
-              
-           </Pressable>
-       
+                <Pressable onPress={() => router.push('./register')}>
+
+                    <View style={Estilo.enter}>
+                        <Text style={{ fontFamily: "MinhaFonte-Regular", color: "#fff", fontSize: 20, paddingLeft: 10, paddingRight: 10 }}>Cadastrar</Text>
+                    </View>
+
+                </Pressable>
+
             </View>
-            
+
             <View style={Estilo.container002}>
                 <ImageBackground
                     source={require('../../../assets/images/forma002.png')}
@@ -88,7 +88,7 @@ export default function pag4() {
                     resizeMode="contain"
                 />
             </View>
-            
+
         </SafeAreaView>
     )
 }
