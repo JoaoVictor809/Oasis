@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useEffect } from 'react';
+import React, { useCallback, useMemo, useRef, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Button, Image } from 'react-native';
 import { GestureHandlerRootView, Pressable } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
@@ -6,7 +6,8 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { LinearGradient } from 'expo-linear-gradient';
 import CustomBackground from '@/components/CustomBackground'; 
-import MenuDrop from '../../../../components/menuDrop'
+import MenuDrop001 from '../../../../components/menuDrop/menuDrop001'
+import MenuDrop002 from '../../../../components/menuDrop/menuDrop002'
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,6 +28,8 @@ const App = () => {
     'Poppins_Regular': require('../../../../assets/fonts/poppins/Poppins-Regular.ttf'),
     'Poppins_Bold': require('../../../../assets/fonts/poppins/Poppins-Bold.ttf'),
   });
+  const [selected001, setSelected001] = useState<string>('');
+  const [selected002, setSelected002] = useState<string>('');
 
   useEffect(() => {
     if (fontsLoaded) {
@@ -41,7 +44,7 @@ const App = () => {
   return (
     <GestureHandlerRootView style={styles.container}>
       <Button title="Abrir" onPress={hqandleOpenPress} />
-        <MenuDrop />
+        
       <BottomSheet
         ref={bottomSheetRef}
         index={-1}
@@ -58,9 +61,12 @@ const App = () => {
                 <Image source={require('@/assets/images/icons/close.png')}/>
             </Pressable>
           </View>
-          
+          <View style={styles.containerOption}>
+          <MenuDrop001 selected={selected001} setSelected={setSelected001} />
+          <MenuDrop002 selected={selected002} setSelected={setSelected002} />
+          </View>
           <Button title="gerar" onPress={() => {}} />
-          <Button title="fechar" />
+          
         </BottomSheetView>
       </BottomSheet>
     </GestureHandlerRootView>
@@ -93,6 +99,10 @@ const styles = StyleSheet.create({
     justifyContent:'space-around',
     alignItems:'center',
     width:'100%'
+  },
+  containerOption:{
+    width:'100%',
+    gap:10
   }
 });
 
