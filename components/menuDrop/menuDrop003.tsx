@@ -13,7 +13,7 @@ interface DropdownProps {
 const Dropdown: React.FC<DropdownProps> = ({ selected, setSelected }) => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
-  const options: string[] = ['Entre 1 e 2 dias', 'Entre 3 e 4 dias', 'Entre 5 e 6 dias', '7 dias'];
+  const options: string[] = ['Sim', 'Não', 'Umpouco'];
 
   const [fontsLoaded] = useFonts({
       'Poppins_Regular': require('../../assets/fonts/poppins/Poppins-Regular.ttf'),
@@ -36,7 +36,7 @@ const Dropdown: React.FC<DropdownProps> = ({ selected, setSelected }) => {
         style={styles.dropdownButton}
         onPress={() => setIsActive(!isActive)}
       >
-        <Text style={styles.dropdownButtonText}>{selected || 'Quantos dias você consegue estudar'}</Text>
+        <Text style={styles.dropdownButtonText}>{selected || 'Você possui dificuldade'}</Text>
         <MaterialIcons
           name={isActive ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
           size={24}
@@ -63,7 +63,6 @@ const Dropdown: React.FC<DropdownProps> = ({ selected, setSelected }) => {
         </View>
       )}
     </View>
-    
   );
 };
 
