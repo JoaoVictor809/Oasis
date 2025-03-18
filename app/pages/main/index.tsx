@@ -28,7 +28,7 @@ export default function Index() {
     const router = useRouter();
 
     const buttonsData = [
-        { image: require("@/assets/images/logotipo-provas/enem.svg"), route: "/pages/main/pagesRoot/teste" },
+        { image: require("@/assets/images/logotipo-provas/enem.svg"), route: "/pages/main/pagesRoot/vestibularPageEnem" },
         { image: require("@/assets/images/logotipo-provas/vunesp.svg"), route: "/pages/main/pagesRoot/vestibularPageVunesp" },
         { image: require("@/assets/images/logotipo-provas/usp.svg"), route: "/pages/main/pagesRoot/vestibularPageUsp" },
     ];

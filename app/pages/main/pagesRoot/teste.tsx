@@ -8,10 +8,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import CustomBackground from '@/components/CustomBackground'; 
 import MenuDrop001 from '../../../../components/menuDrop/menuDrop001'
 import MenuDrop002 from '../../../../components/menuDrop/menuDrop002'
+import MenuDrop003 from '../../../../components/menuDrop/menuDrop003'
 
 SplashScreen.preventAutoHideAsync();
 
 const App = () => {
+  
   // refs e snapPoints
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['30%', '50%', '80%'], []);
@@ -30,6 +32,7 @@ const App = () => {
   });
   const [selected001, setSelected001] = useState<string>('');
   const [selected002, setSelected002] = useState<string>('');
+  const [selected003, setSelected003] = useState<string>('');
 
   useEffect(() => {
     if (fontsLoaded) {
@@ -64,8 +67,14 @@ const App = () => {
           <View style={styles.containerOption}>
           <MenuDrop001 selected={selected001} setSelected={setSelected001} />
           <MenuDrop002 selected={selected002} setSelected={setSelected002} />
+          <MenuDrop003 selected={selected003} setSelected={setSelected003} />
           </View>
-          <Button title="gerar" onPress={() => {}} />
+          <Pressable>
+            <View style={styles.buttonGo}>
+               <Image source={require('@/assets/images/go.png')}/>
+          </View>
+          </Pressable>
+          
           
         </BottomSheetView>
       </BottomSheet>
@@ -82,6 +91,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 36,
     alignItems: 'center',
+    gap:25
   },
   title: {
     fontSize: 30,
@@ -102,7 +112,15 @@ const styles = StyleSheet.create({
   },
   containerOption:{
     width:'100%',
-    gap:10
+    gap:18
+  },
+  buttonGo:{
+    backgroundColor:'#1261D7',
+    padding:13,
+    width:160,
+    borderRadius:20,
+    alignItems:'center',
+    cursor:'pointer'
   }
 });
 
