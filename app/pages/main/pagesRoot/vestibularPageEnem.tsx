@@ -1,23 +1,39 @@
-import { View, Text, Pressable, Image, ScrollView, Button } from "react-native";
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
+import { View, Text, Image, ScrollView, Button,StyleSheet } from "react-native";
+import React, { useEffect, useRef, useCallback, useMemo, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import StyleOfVestibular from "@/assets/style/vestibularPages";
 import { Link } from "expo-router";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import BottomSheet from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView, Pressable } from "react-native-gesture-handler";
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import CustomBackground from '@/components/CustomBackground'; 
+import MenuDrop001 from '../../../../components/menuDrop/menuDrop001'
+import MenuDrop002 from '../../../../components/menuDrop/menuDrop002'
+import MenuDrop003 from '../../../../components/menuDrop/menuDrop003'
+
 
 
 SplashScreen.preventAutoHideAsync();
 
 export default function VestibularScreen() {
-    const bottomSheetref= useRef(null);
-    const snapPoints = useMemo(() => ["30%", "80%"], [])
+    const bottomSheetRef = useRef<BottomSheet>(null);
+  const snapPoints = useMemo(() => ['30%', '50%', '80%'], []);
+
+  const hqandleOpenPress = () => bottomSheetRef.current?.expand();
+  const hqandleClosePress = () => bottomSheetRef.current?.close();
+
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log('handleSheetChanges', index);
+  }, []);
 
     const [fontsLoaded] = useFonts({
         'Poppins_Regular': require('../../../../assets/fonts/poppins/Poppins-Regular.ttf'),
         'Poppins_Bold': require('../../../../assets/fonts/poppins/Poppins-Bold.ttf'),
     });
+
+    const [selected001, setSelected001] = useState<string>('');
+    const [selected002, setSelected002] = useState<string>('');
+    const [selected003, setSelected003] = useState<string>('');
 
     useEffect(() => {
         if (fontsLoaded) {
@@ -30,8 +46,8 @@ export default function VestibularScreen() {
     }
 
     return (
-        <GestureHandlerRootView style={{flex:1}}>
-        <View style={StyleOfVestibular.background}>
+        
+        <GestureHandlerRootView style={StyleOfVestibular.background}>
             <View style={StyleOfVestibular.header}>
                 <Pressable>
                     <Link href={'../'}>
@@ -93,25 +109,85 @@ export default function VestibularScreen() {
                             alignItems: 'center', 
                             marginTop: 30 
                         }}
+                        onPress={hqandleOpenPress}
                     >
                         <Text style={{ color: '#FFFFFF', fontFamily: 'Poppins_Bold', fontSize: 20 }}>
                             Gerar
                         </Text>
                     </Pressable>
+                    <BottomSheet
+        ref={bottomSheetRef}
+        index={-1}
+        onChange={handleSheetChanges}
+        snapPoints={snapPoints}
+        enablePanDownToClose={true}
+        backgroundComponent={(props) => <CustomBackground {...props} />}
+        style={styles.bottomSheet} 
+      >
+        <BottomSheetView style={styles.contentContainer}>
+          <View style={styles.containerTitle}>
+            <Text style={styles.title}>Informações</Text>
+            <Pressable onPress={hqandleClosePress} >
+                <Image source={require('@/assets/images/icons/close.png')}/>
+            </Pressable>
+          </View>
+          <View style={styles.containerOption}>
+          <MenuDrop001 selected={selected001} setSelected={setSelected001} />
+          <MenuDrop002 selected={selected002} setSelected={setSelected002} />
+          <MenuDrop003 selected={selected003} setSelected={setSelected003} />
+          </View>
+          <Pressable>
+            <View style={styles.buttonGo}>
+               <Image source={require('@/assets/images/go.png')}/>
+          </View>
+          </Pressable>
+          
+          
+        </BottomSheetView>
+      </BottomSheet>
                 </View>
             </ScrollView>
-        </View>
-        <BottomSheet
-        ref={bottomSheetref}
-        index={1}
-        snapPoints={snapPoints}
-        backgroundStyle={{backgroundColor:'#fff'}}
-        >
-            <View >
-               <Text>texto</Text> 
-               <Button title="gerar" onPress={()=>{}}/>
-            </View>
-        </BottomSheet>
         </GestureHandlerRootView>
+        
+        
     );
 }
+
+const styles = StyleSheet.create({
+   
+    contentContainer: {
+      flex: 1,
+      padding: 36,
+      alignItems: 'center',
+      gap:25
+    },
+    title: {
+      fontSize: 30,
+      fontFamily: 'Poppins_Bold',
+      color:'#fff'
+    },
+    bottomSheet: {
+      borderTopLeftRadius: 40, 
+      borderTopRightRadius: 40, 
+      overflow: 'hidden', 
+    },
+    containerTitle:{
+      display:'flex',
+      flexDirection:'row',
+      justifyContent:'space-around',
+      alignItems:'center',
+      width:'100%'
+    },
+    containerOption:{
+      width:'100%',
+      gap:18
+    },
+    buttonGo:{
+      backgroundColor:'#1261D7',
+      padding:13,
+      width:160,
+      borderRadius:20,
+      alignItems:'center',
+      cursor:'pointer'
+    }
+  });
