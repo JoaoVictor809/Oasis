@@ -36,7 +36,7 @@ const Dropdown: React.FC<DropdownProps> = ({ selected, setSelected }) => {
         style={styles.dropdownButton}
         onPress={() => setIsActive(!isActive)}
       >
-        <Text style={styles.dropdownButtonText}>{selected || 'Quantas horas você pode estudar'}</Text>
+        <Text style={styles.dropdownButtonText}>{selected || 'Quantas horas você pode estudar?'}</Text>
         <MaterialIcons
           name={isActive ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
           size={24}
