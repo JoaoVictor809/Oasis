@@ -13,7 +13,7 @@ Este é um projeto [Expo](https://expo.dev) criado com [`create-expo-app`](https
 2.  Inicie o aplicativo:
 
     ```bash
-    npx expo start
+    npm run web
     ```
 
 Na saída, você encontrará opções para abrir o aplicativo em:
