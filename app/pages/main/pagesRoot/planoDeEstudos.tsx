@@ -15,23 +15,23 @@ const modulos = [
     id: "1",
     title: "Módulo 1 - HTML",
     data: [
-      { id: "1", title: "Introdução ao HTML", icon: "video-camera" },
-      { id: "2", title: "Tags e Estrutura", icon: "book" },
-      { id: "3", title: "Atributos e Estilos", icon: "book" },
-      { id: "4", title: "Listas e Tabelas", icon: "book" },
-      { id: "5", title: "Formulários e Inputs", icon: "book" },
-      { id: "6", title: "Teste o seu conhecimentos", icon: "pencil" },
+      { id: "1", title: "Introdução ao HTML" },
+      { id: "2", title: "Tags e Estrutura" },
+      { id: "3", title: "Atributos e Estilos" },
+      { id: "4", title: "Listas e Tabelas" },
+      { id: "5", title: "Formulários e Inputs" },
+      { id: "6", title: "Teste o seu conhecimentos" }, // First module "Teste o seu conhecimentos"
     ],
   },
   {
     id: "2",
     title: "Módulo 2 - HTML",
     data: [
-      { id: "6", title: "Semântica e Acessibilidade", icon: "video-camera" },
-      { id: "7", title: "Elementos de Mídia", icon: "book" },
-      { id: "8", title: "SEO e Performance", icon: "book" },
-      { id: "9", title: "HTML5 Avançado", icon: "book" },
-      { id: "10", title: "Teste o seu conhecimento", icon: "pencil" },
+      { id: "6", title: "Semântica e Acessibilidade" },
+      { id: "7", title: "Elementos de Mídia" },
+      { id: "8", title: "SEO e Performance" },
+      { id: "9", title: "HTML5 Avançado" },
+      { id: "10", title: "Teste o seu conhecimento" }, // Second module "Teste o seu conhecimento"
     ],
   },
 ];
@@ -43,21 +43,20 @@ const ModuloList = ({ title, data }) => (
       data={data}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => {
-        const isTestButton = item.icon === "pencil";
+        const isTestButton = item.title === "Teste o seu conhecimento" || item.title === "Teste o seu conhecimentos"; // Check for both modules
         
         return (
           <View style={styles.card}>
             <TouchableOpacity
               style={[
                 styles.button,
-                isTestButton && styles.testButton,
+                isTestButton && styles.testButton, // Apply custom style for the test button
               ]}
             >
-              {item.icon && <Icon name={item.icon} size={18} color={isTestButton ? "#1261D7" : "#FFF"} style={styles.leftIcon} />} 
               <Text
                 style={[
                   styles.buttonText,
-                  isTestButton && styles.testButtonText,
+                  isTestButton && styles.testButtonText, // Change text color for the test button
                 ]}
               >
                 {item.title}
@@ -154,15 +153,14 @@ const styles = StyleSheet.create({
 
   icon: { marginLeft: 10, color: "#FFF" },
 
-  leftIcon: { marginRight: 10 },
-
+  // Custom styles for the "Teste o seu conhecimento" button
   testButton: {
-    backgroundColor: "#FFF",
-    borderWidth: 2,
-    borderColor: "#1261D7",
+    backgroundColor: "#FFF", // White background
+    borderWidth: 2, // Blue border width
+    borderColor: "#1261D7", // Blue border color
   },
 
   testButtonText: {
-    color: "#1261D7",
+    color: "#1261D7", // Blue text color
   },
 });
