@@ -4,33 +4,42 @@ export default StyleSheet.create({
     container: {
         flex: 1, 
         justifyContent: 'flex-start', 
-        alignItems: 'flex-end', 
+        alignItems: 'flex-end',
+        
     },
     forma001: {
         position: 'absolute',
         top: 0,
         right: 0,
-        width: 150,
+        width: 133,
         height: 150, 
+        zIndex:-1
     },
     container002: {
         flex: 1,
         justifyContent: 'flex-end',
-        alignItems: 'flex-start', 
+        alignItems: 'flex-start',
+        zIndex:-1 
     },
     forma002: {
         position: 'absolute',
         bottom: 0,
         left:0,
-        width: 150, 
-        height: 150, 
+        width: 160, 
+        height: 99, 
     },
     title:{
         flex:1,
         width:'100%',
         alignItems:'center',
         justifyContent:'center',
-        gap:"3%"
+        gap:20
+    },
+    containerRegis:{
+        display:'flex',
+        width:'100%',
+        alignItems:'center',
+        gap:5
     },
     botao:{
         position: 'absolute',
@@ -40,7 +49,7 @@ export default StyleSheet.create({
     txt:{
         fontSize:25,
         fontFamily:'MinhaFonte-Regular',
-        color:"#fff",
+        color:"#1261D7",
         textAlign:"center"
     },
     caixa:{
@@ -48,19 +57,38 @@ export default StyleSheet.create({
     },
     input:{
         height: 45,
-        margin: 12,
         padding: 10,
         width:"75%",
         borderRadius:20,
-        backgroundColor:"#585454af"
+        backgroundColor:"#585454af",
+        color:'#1261D7',
+        fontFamily:'Poppins_Regular',
+        borderWidth: 0, 
+        outlineWidth: 0, 
+        fontWeight:'bold'
     },
     enter:{
-        
+        width:'100%',
         height: 45,
         justifyContent:"center",
         alignItems:"center",
-        width:"100%",
         borderRadius:20,
-        backgroundColor:"#1261D7"
+        backgroundColor:"#1261D7",
+        shadowColor: '#000', 
+        shadowOffset: { width: 0, height: 10 }, 
+        shadowOpacity: 0.25, 
+        shadowRadius: 5, 
+        elevation: 5, 
+    },
+    containerLogin:{
+        display:'flex',
+        flexDirection:'row',
+        gap:2
+    },
+    textLogin:{
+      color:"#1261D7" ,
+      fontFamily:'Poppins_Regular',
+      display:'flex',
+      fontWeight:'bold'
     }
 })
