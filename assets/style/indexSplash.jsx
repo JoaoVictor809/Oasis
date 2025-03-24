@@ -15,7 +15,7 @@ export default StyleSheet.create({
         position: 'absolute',
         top: 0,
         right: 0,
-        width: 150,
+        width: 151,
         height: 150, 
     },
     container002: {
@@ -27,7 +27,7 @@ export default StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         left:0,
-        width: 150, 
+        width: 146, 
         height: 150, 
     },
     title:{
