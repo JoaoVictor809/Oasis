@@ -32,8 +32,8 @@ export default function VestibularScreen() {
                     </Link>
                 </Pressable>
                 <View style={StyleOfVestibular.headerTitle}>
-                    <Text style={{fontFamily:'Poppins_Bold', color:'#fff', fontSize:20}}>Enem</Text>
-                    <Text style={{fontFamily:'Poppins_Regular', color:'#fff', fontSize:15}}>-Exame Nacional do Ensino Médio</Text>
+                    <Text style={{fontFamily:'Poppins_Bold', color:'#fff', fontSize:20}}>Vunesp</Text>
+                    <Text style={{fontFamily:'Poppins_Regular', color:'#fff', fontSize:15}}>-Fundação para o Vestibular da Universidade Estadual Paulista</Text>
                 </View>
             </View>
             <ScrollView 
