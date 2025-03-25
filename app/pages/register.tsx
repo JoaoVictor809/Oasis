@@ -5,13 +5,18 @@ import * as SplashScreen from 'expo-splash-screen';
 import React, { useState, useEffect } from 'react';
 import { useFonts } from "expo-font";
 import { Stack, useRouter } from "expo-router";
+import { TextInputMask } from 'react-native-masked-text';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function pag4() {
     const router = useRouter();
-    const [text, onChangeText] = React.useState('');
-    const [number, onChangeNumber] = React.useState('');
+    const [name, onChangeName] = React.useState('');
+    const [cpf, onChangeCpf] = React.useState('');
+    const [endr, onChangeEndr] = React.useState('');
+    const [email, onChangeEmail] = React.useState('');
+    const [data, onChangeData] = React.useState('');
+    const [senha, onChangeSenha] = React.useState('');
     const [fontsLoaded] = useFonts({
         'MinhaFonte-Regular': require('../../assets/fonts/superOcean.ttf'),
         'Fonte-texto': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
@@ -54,48 +59,52 @@ export default function pag4() {
                 <View style={Estilo.containerRegis}>
                     <TextInput
                         style={Estilo.input}
-                        onChangeText={onChangeText}
-                        value={text}
+                        onChangeText={onChangeName}
+                        value={name}
                         placeholder="Nome Completo"
                         keyboardType="default"
                     />
 
                     <TextInput
                         style={Estilo.input}
-                        onChangeText={onChangeText}
-                        value={number}
+                        onChangeText={onChangeCpf}
+                        value={cpf}
                         placeholder="CPF"
                         keyboardType="numeric"
                     />
 
                     <TextInput
                         style={Estilo.input}
-                        onChangeText={onChangeText}
-                        value={number}
+                        onChangeText={onChangeEndr}
+                        value={endr}
                         placeholder="Endereço"
                         keyboardType="default"
                     />
 
                     <TextInput
                         style={Estilo.input}
-                        onChangeText={onChangeText}
-                        value={number}
+                        onChangeText={onChangeEmail}
+                        value={email}
                         placeholder="Email"
                         keyboardType="email-address"
                     />
 
-                    <TextInput
+                    <TextInputMask
                         style={Estilo.input}
-                        onChangeText={onChangeText}
-                        value={number}
-                        placeholder="Data"
-                        keyboardType="default"
+                        type={'custom'}
+                        options={{
+                            mask: '99/99/9999',
+                        }}
+                        onChangeText={onChangeData}
+                        value={data}
+                        placeholder="data"
+                        keyboardType="numeric"
                     />
 
                     <TextInput
                         style={Estilo.input}
-                        onChangeText={onChangeText}
-                        value={number}
+                        onChangeText={onChangeSenha}
+                        value={senha}
                         placeholder="Senha"
                         secureTextEntry
                         keyboardType="default"
