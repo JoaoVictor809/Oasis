@@ -13,7 +13,7 @@ interface DropdownProps {
 const Dropdown: React.FC<DropdownProps> = ({ selected, setSelected }) => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
-  const options: string[] = ['Sim', 'Não', 'Umpouco'];
+  const options: string[] = ['Sim', 'Não', 'Um pouco'];
 
   const [fontsLoaded] = useFonts({
       'Poppins_Regular': require('../../assets/fonts/poppins/Poppins-Regular.ttf'),
