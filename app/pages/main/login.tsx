@@ -1,34 +1,18 @@
 import { View, Text, Image, Pressable, SafeAreaView, ImageBackground, TextInput } from 'react-native'
 import Estilo from '../../../assets/style/login'
 import { Link } from "expo-router";
-import * as SplashScreen from 'expo-splash-screen';
+
 import React, { useState, useEffect } from 'react';
-import { useFonts } from "expo-font";
+
 import { Stack, useRouter } from "expo-router";
 
-SplashScreen.preventAutoHideAsync();
+
 
 export default function pag4() {
     
     const [text, onChangeText] = React.useState('');
     const [text01, onChangeText01] = React.useState('');
-    const [fontsLoaded] = useFonts({
-        'MinhaFonte-Regular': require('../../../assets/fonts/superOcean.ttf'),
-        'Fonte-texto': require('../../../assets/fonts/TitilliumWeb-Regular.ttf'),
-        'Poppins_Regular': require('../../../assets/fonts/poppins/Poppins-Regular.ttf'),
-        'Poppins_Bold': require('../../../assets/fonts/poppins/Poppins-Bold.ttf')
-    });
-    // Oculta a tela de splash quando as fontes são carregadas
-    useEffect(() => {
-        if (fontsLoaded) {
-            SplashScreen.hideAsync();
-        }
-    }, [fontsLoaded]);
-
-    if (!fontsLoaded) {
-        // Retorna null ou qualquer outra coisa enquanto a tela de splash ainda está visível.
-        return null
-    }
+    
     const router = useRouter();
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#1261D7" }}>
