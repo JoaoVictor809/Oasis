@@ -74,7 +74,7 @@ export default function TabBar({ state, descriptors, navigation }) {
                         onLongPress={onLongPress}
                         style={styles.tabbarItem}
                     >
-                        {/* Renderizando o ícone */}
+                        {/*Renderizando o ícone*/}
                         <Icon
                             color={isFocused ? activeColor : greyColor}
                         />
