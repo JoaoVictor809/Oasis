@@ -1,4 +1,16 @@
 import { StyleSheet } from 'react-native'
+import { useFonts } from "expo-font";
+import * as SplashScreen from 'expo-splash-screen';
+import React, { useState, useEffect } from 'react';
+SplashScreen.preventAutoHideAsync();
+const [fontsLoaded] = useFonts({
+        'MinhaFonte-Regular': require('@/assets/fonts/superOcean.ttf'),
+        'Fonte-texto': require('@/assets/fonts/TitilliumWeb-Regular.ttf'),
+        'Poppins_Regular': require('@/assets/fonts/poppins/Poppins-Regular.ttf'),
+        'Poppins_Bold': require('@/assets/fonts/poppins/Poppins-Bold.ttf')
+    });
+    // Oculta a tela de splash quando as fontes são carregadas
+   
 
 export default StyleSheet.create({
     container: {
