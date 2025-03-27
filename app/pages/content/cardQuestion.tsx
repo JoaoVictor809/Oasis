@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, View, Text, Alert, StyleSheet } from "react-native";
+import { SafeAreaView, View, Text, Alert, StyleSheet, Pressable, Image } from "react-native";
 import { useFonts } from "expo-font";
+import { Link } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { Card, Button } from "@rneui/themed";
 import * as Progress from "react-native-progress";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
-import styles from "@/assets/style/cardQuestion"; // seu arquivo de estilos customizado, se existir
+import styles from "@/assets/style/cardQuestion"; 
+import { Stack, useRouter } from "expo-router";
 
 interface Question {
   id: number;
@@ -67,10 +69,22 @@ const QuizScreen = () => {
   };
 
   const progressValue = (currentQuestion + (selectedAnswer ? 1 : 0)) / questions.length;
+  const router = useRouter();
 
   return (
-    
+
     <View style={localStyles.quizContainer}>
+      <View style={localStyles.headerBack}>
+        <Pressable  onPress={() => router.push('../')}>
+          <Link href={'../'}>
+            <Image style={{ width: 30, height: 30 }} source={require('@/assets/images/Back.png')} />
+          </Link>
+        </Pressable>
+        <View style={localStyles.headerTitle}>
+          <Text style={{ fontFamily: 'Poppins_Bold', color: '#fff', fontSize: 20 }}>Voltar para página inícial</Text>
+          
+        </View>
+      </View>
       <Text style={localStyles.header}>Quiz de Concursos</Text>
       <View style={localStyles.infoContainer}>
         <Text style={localStyles.infoText}>
@@ -180,20 +194,40 @@ const localStyles = StyleSheet.create({
     marginVertical: 10,
   },
   option: {
-    backgroundColor: "#1261D7", // azul personalizado
+    backgroundColor: "#1261D7", 
     paddingVertical: 12,
     borderRadius: 8,
     marginBottom: 10,
   },
   selectedOption: {
-    backgroundColor: "#2ecc71", // verde para a opção selecionada
+    backgroundColor: "#2ecc71", 
     paddingVertical: 12,
     borderRadius: 8,
   },
   incorrectOption: {
-    backgroundColor: "#e74c3c", // vermelho para a opção incorreta
+    backgroundColor: "#e74c3c", 
     paddingVertical: 12,
     borderRadius: 8,
+  },
+  headerBack: {
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+    backgroundColor: '#1261D7',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    display: 'flex',
+    flexDirection: 'row',
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    zIndex:1
+  },
+  headerTitle: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingRight:50
+   
   },
 });
 

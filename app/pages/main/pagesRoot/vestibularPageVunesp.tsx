@@ -4,6 +4,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { Link } from "expo-router";
 import StyleOfVestibular from "@/assets/style/vestibularPages";
+import { Stack, useRouter } from "expo-router";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -22,6 +23,7 @@ export default function VestibularScreen() {
     if (!fontsLoaded) {
         return null;
     }
+    const router = useRouter();
 
     return (
         <View style={StyleOfVestibular.background}>
@@ -85,6 +87,7 @@ export default function VestibularScreen() {
                             alignItems: 'center', 
                             marginTop: 30 
                         }}
+                        onPress={() => router.push('../../telaloading')}
                     >
                         <Text style={{ color: '#FFFFFF', fontFamily: 'Poppins_Bold', fontSize: 20 }}>
                             Gerar

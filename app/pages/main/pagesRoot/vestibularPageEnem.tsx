@@ -10,6 +10,7 @@ import CustomBackground from '@/components/CustomBackground';
 import MenuDrop001 from '../../../../components/menuDrop/menuDrop001'
 import MenuDrop002 from '../../../../components/menuDrop/menuDrop002'
 import MenuDrop003 from '../../../../components/menuDrop/menuDrop003'
+import { Stack, useRouter } from "expo-router";
 
 
 
@@ -44,6 +45,8 @@ export default function VestibularScreen() {
     if (!fontsLoaded) {
         return null;
     }
+    const router = useRouter();
+
 
     return (
         
@@ -136,7 +139,7 @@ export default function VestibularScreen() {
           <MenuDrop002 selected={selected002} setSelected={setSelected002} />
           <MenuDrop003 selected={selected003} setSelected={setSelected003} />
           </View>
-          <Pressable>
+          <Pressable onPress={() => router.push('../../telaloading')}>
             <View style={styles.buttonGo}>
                <Image source={require('@/assets/images/go.png')}/>
           </View>
