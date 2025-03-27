@@ -78,4 +78,56 @@ export default StyleSheet.create({
       width: 280,
       padding: 80,
     },
+
+     //img back 
+     containerBack: {
+        flex: 1, 
+        justifyContent: 'flex-end', 
+        alignItems: 'flex-start', 
+        zIndex:-1
+    },
+    forma001Back: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: 151,
+        height: 150, 
+    },
+    containerBack002: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-start', 
+        zIndex:-1
+    },
+    forma002Back: {
+        position: 'absolute',
+        top: 100,
+        left:0,
+        width: 146, 
+        height: 150, 
+    },
+
+    titlePage:{
+       position:'absolute',
+       width:'100%',
+       display:'flex',
+       flexDirection:'column',
+       top:70 ,
+       paddingLeft:60,
+       zIndex:65
+       
+    },
+    subTitlePage:{},
+    styletitle:{
+        color:'#fff',
+        fontFamily:'Poppins_Bold',
+        fontSize:25
+    },
+    imageHome:{
+        position:'absolute',
+        top:-90,
+        zIndex:-155,
+        right:0
+    }
+ 
 });
