@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, ImageBackground, Pressable, SafeAreaView, TextInput } from 'react-native'
+import { StyleSheet, View, Text, ImageBackground, Pressable, SafeAreaView, TextInput, Image } from 'react-native'
 import Estilo from '../../assets/style/register'
 import { Link } from "expo-router";
 import * as SplashScreen from 'expo-splash-screen';
@@ -37,6 +37,14 @@ export default function pag4() {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+
+            <View style={{ position: 'absolute', left: 10, top: 10, zIndex: 11 }}>
+                <Pressable onPress={() => router.push('./main/login')} >
+                    <Image source={require('@/assets/images/back.svg')} />
+                </Pressable>
+            </View>
+
+
             <View style={Estilo.container}>
                 <ImageBackground
                     source={require('@/assets/images/forma01.png')}
