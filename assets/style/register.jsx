@@ -13,7 +13,8 @@ export default StyleSheet.create({
         right: 0,
         width: 133,
         height: 150, 
-        zIndex:-1
+        zIndex:-1,
+        
     },
     container002: {
         flex: 1,
