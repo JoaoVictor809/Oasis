@@ -1,4 +1,4 @@
-import { View, Text, Pressable, Image, ScrollView, ActivityIndicator } from "react-native";
+import { View, Text, Pressable, Image, ScrollView, ActivityIndicator, ImageBackground } from "react-native";
 import React, { useEffect } from "react";
 import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -62,7 +62,32 @@ export default function Index() {
 
     return (
         <ScrollView style={StyleOfIndex.background} contentContainerStyle={{ paddingBottom: 20 }}>
+            <View style={StyleOfIndex.containerBack}>
+                <ImageBackground
+                    source={require('@/assets/images/forma001.png')}
+                    style={StyleOfIndex.forma001Back}
+                    resizeMode="contain"
+                />
+            </View>
+            <View style={StyleOfIndex.titlePage}>
+                <Text style={StyleOfIndex.styletitle}>
+                    Deseja <br />
+                    estudar para <br />
+                    Vestibulares?
+                </Text>
+
+            </View>
+            <View style={StyleOfIndex.containerBack002}>
+                <ImageBackground
+                    source={require('@/assets/images/forma002.png')}
+                    style={StyleOfIndex.forma002Back}
+                    resizeMode="contain"
+                />
+            </View>
             <View style={StyleOfIndex.container}>
+                <View style={StyleOfIndex.imageHome}>
+                <Image source={require('@/assets/images/imgHome.svg')} />
+                </View>
                 <Text style={StyleOfIndex.mainTitle}>Vestibulares</Text>
                 <Text style={StyleOfIndex.subtitle}>Os vestibulares mais concorridos</Text>
 

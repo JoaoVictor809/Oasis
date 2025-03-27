@@ -32,6 +32,7 @@ export default function pag4() {
                     login para uma experiência de aprendizado <br />
                     adaptada às suas necessidades!</Text>
                 <View style={Estilo.containerInput}>
+                    
                 <TextInput
                     style={Estilo.input}
                     onChangeText={onChangeText}
