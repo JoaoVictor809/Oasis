@@ -66,7 +66,8 @@ export default StyleSheet.create({
         fontFamily:'Poppins_Regular',
         borderWidth: 0, 
         outlineWidth: 0, 
-        fontWeight:'bold'
+        fontWeight:'bold',
+        fontSize:19
     },
     enter:{
         width:'100%',
