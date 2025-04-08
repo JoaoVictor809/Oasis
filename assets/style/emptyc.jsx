@@ -2,33 +2,40 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
     title: {
-        color: '#000',
+        color: '#ffff',
         fontSize: 30,
         fontWeight: 'bold',
-        marginBottom: 5, // Espaço abaixo do título principal
-        fontFamily: 'Poppins_Bold', // Aplicando a fonte personalizad
-    },
-    button: {
-
+        marginBottom: 5, 
+        fontFamily: 'Poppins_Bold', 
     },
     mainContainer: {
+        flex: 1,
+        backgroundColor: '#1261D7',
         alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 100,
+        justifyContent: 'center',     
     },
     image: {
-        width: 340,   // Novo tamanho
-        height: 340,  // Novo tamanho
+        width: 340,   
+        height: 340,  
         resizeMode: 'contain',
         marginBottom: 15,
     },
+    button: {
+        width: 250,
+        height: 60,
+        backgroundColor: '#0E4DB0', // azul escuro
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+        marginTop: 10,
+    },
     buttonText: {
-        color: '#000',
+        color: '#ffff',
         fontSize: 30,
         fontWeight: 'bold',
-        marginBottom: 5, // Espaço abaixo do título principal
-        marginTop: 50,
-        fontFamily: 'Poppins_Bold', // Aplicando a fonte personalizad
-      
+        fontFamily: 'Poppins_Bold',
+        alignItems: 'center',
     },
+    
+    
 })
