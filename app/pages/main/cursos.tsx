@@ -41,7 +41,7 @@ export default function curso() {
                     </View>
                     <View style={Estilo.boxSearch}>
                         <TextInput
-                            style={[Estilo.input, { outlineWidth: 0 }]} 
+                            style={[Estilo.input, { borderWidth: 0 }]} 
                             onChangeText={onChangeText}
                             value={text}
                             placeholder="Pesquise o nome do curso"
