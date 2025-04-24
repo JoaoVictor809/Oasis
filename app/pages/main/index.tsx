@@ -5,6 +5,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import ColorList from "../../../components/ColorList";
 import StyleOfIndex from "../../../assets/style/home";
+import Icon from 'react-native-vector-icons/FontAwesome6';  
 
 SplashScreen.preventAutoHideAsync();
 
@@ -86,20 +87,27 @@ export default function Index() {
             </View>
             <View style={StyleOfIndex.container}>
                 <View style={StyleOfIndex.imageHome}>
-                <Image source={require('@/assets/images/imgHome.svg')} />
+                    <Image source={require('@/assets/images/imgHome.svg')} />
                 </View>
                 <Text style={StyleOfIndex.mainTitle}>Vestibulares</Text>
                 <Text style={StyleOfIndex.subtitle}>Os vestibulares mais concorridos</Text>
 
                 {renderButtons()}
 
-                <Text style={StyleOfIndex.mainTitle}>Seus cursos</Text>
-                <Text style={StyleOfIndex.subtitle}>Clique para ver todos os cursos</Text>
+
                 <View style={StyleOfIndex.imageHyperLink}>
-                    <Image
-                        source={require("@/assets/images/logotipo-provas/image3.png")}
-                        style={StyleOfIndex.image}
-                    />
+                    <View style={StyleOfIndex.containerCourses}>
+                        <View style={{padding:20}}>
+                        <Text style={StyleOfIndex.cousesTitle}>Seus cursos</Text>
+                        <Text style={StyleOfIndex.subtitle}>Clique para ver todos os cursos</Text>
+                        <Pressable onPress={() => router.push('/pages/main/empty')}>
+                            <View style={StyleOfIndex.buttonCourses}>
+                                <Icon name="arrow-right" solid size={30} color={'#fff'}/>
+                            </View>
+                        </Pressable>
+                        </View>
+                        <Image style={{ position: 'absolute', right: 0, width: '30%', height: 200, borderTopRightRadius: 40, zIndex: -1 }} source={require('../../../assets/images/book.svg')} />
+                    </View>
                 </View>
 
                 <Text style={StyleOfIndex.subtitlePrincipal}>Os concursos mais concorridos</Text>
