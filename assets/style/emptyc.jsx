@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
     title: {
-        color: '#ffff',
+        color: '#1261D7',
         fontSize: 30,
         fontWeight: 'bold',
         marginBottom: 5, 
@@ -10,7 +10,7 @@ export default StyleSheet.create({
     },
     mainContainer: {
         flex: 1,
-        backgroundColor: '#1261D7',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',     
     },
@@ -23,11 +23,11 @@ export default StyleSheet.create({
     button: {
         width: 250,
         height: 60,
-        backgroundColor: '#0E4DB0', // azul escuro
-        paddingVertical: 10,
-        paddingHorizontal: 20,
+        backgroundColor: '#0E4DB0', 
+        justifyContent:'center',
+        alignItems:'center',
         borderRadius: 8,
-        marginTop: 10,
+        
     },
     buttonText: {
         color: '#ffff',
@@ -36,6 +36,11 @@ export default StyleSheet.create({
         fontFamily: 'Poppins_Bold',
         alignItems: 'center',
     },
-    
+    back:{
+        position:'absolute',
+        top:25,
+        left:25,
+        
+    },
     
 })
