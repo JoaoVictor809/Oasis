@@ -23,14 +23,13 @@ export default StyleSheet.create({
             fontSize: 30,
             fontWeight: 'bold',
             letterSpacing: 1,
-            marginBottom: 5, // Espaço abaixo do título principal
+            marginBottom: 5, 
             marginTop: 50,
-            fontFamily: 'Poppins_Bold', // Aplicando a fonte personalizad
-      
+            fontFamily: 'Poppins_Bold',   
     },
     subtitle: {
         fontSize: 16,
-        marginBottom: 20, // Espaço abaixo do subtítulo
+        marginBottom: 20, 
         fontWeight:300,
     },
     subtitlePrincipal: {
@@ -47,7 +46,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#1261D7',
         marginRight: 10, 
-        marginBottom: 10, 
+        marginBottom: 30, 
         
     },
     buttonImage: {
@@ -63,16 +62,43 @@ export default StyleSheet.create({
         width:'100%',
         gap:30,
     },
-    imageHyperLink: {
+    courseBox: {
       width:'100%',
-      height: '100%', 
-      marginBottom: 50,
-      padding: 50,
+      height: "auto", 
+      backgroundColor:'#fff',
       borderRadius: 25,
-      alignItems:'center',
-      justifyContent: 'flex-start',
-      marginRight: 10, 
-      marginBottom: 10, 
+      shadowColor: '#000', 
+        shadowOffset: { width: 0, height: 10 }, 
+        shadowOpacity: 0.25, 
+        shadowRadius: 5, 
+        elevation: 5, 
+        padding:30,
+        
+    },
+    courseTitle:{
+        color: '#000',
+            fontSize: 30,
+            fontWeight: 'bold',
+            letterSpacing: 1,
+            marginBottom: 5, 
+            fontFamily: 'Poppins_Bold',  
+    },
+    bookCourse:{
+        position:'absolute',
+        top:0,
+        right:0,
+        width:'26%',
+        height:150,
+        borderTopEndRadius:25
+    },
+    buttonCourse:{
+        width:'40%',
+        height:50,
+        backgroundColor:'#1261D7',
+        borderRadius:25,
+        cursor:'pointer',
+        justifyContent:'center',
+        alignItems:'center'
     },
     image: {
       width: 280,
