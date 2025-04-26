@@ -5,6 +5,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import ColorList from "../../../components/ColorList";
 import StyleOfIndex from "../../../assets/style/home";
+import Icon from 'react-native-vector-icons/FontAwesome6'; 
 
 SplashScreen.preventAutoHideAsync();
 
@@ -93,13 +94,15 @@ export default function Index() {
 
                 {renderButtons()}
 
-                <Text style={StyleOfIndex.mainTitle}>Seus cursos</Text>
+                <View style={StyleOfIndex.courseBox}>
+                <Text style={StyleOfIndex.courseTitle}>Seus cursos</Text>
                 <Text style={StyleOfIndex.subtitle}>Clique para ver todos os cursos</Text>
-                <View style={StyleOfIndex.imageHyperLink}>
-                    <Image
-                        source={require("@/assets/images/logotipo-provas/image3.png")}
-                        style={StyleOfIndex.image}
-                    />
+                <Image style={StyleOfIndex.bookCourse} source={require('../../../assets/images/book.svg')} />
+                <Pressable onPress={() => router.push('/pages/main/empty')}>
+                <View style={StyleOfIndex.buttonCourse}>
+                    <Icon name="arrow-right" color={"#fff"} solid size={25}/>
+                </View>
+                </Pressable>
                 </View>
 
                 <Text style={StyleOfIndex.subtitlePrincipal}>Os concursos mais concorridos</Text>

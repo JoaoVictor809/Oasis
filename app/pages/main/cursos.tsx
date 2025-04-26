@@ -7,6 +7,7 @@ import Estilo from '../../../assets/style/curso'
 import Slider from "@/components/Slider";
 import { ImageSlider } from '@/data/SliderData'
 import ListCurso001 from '@/components/curso/curso001'
+import Icon from 'react-native-vector-icons/FontAwesome6'; 
 
 //pega a altura 
 const { height } = Dimensions.get('window');
@@ -41,7 +42,7 @@ export default function curso() {
                     </View>
                     <View style={Estilo.boxSearch}>
                         <TextInput
-                            style={[Estilo.input, { borderWidth: 0 }]} 
+                            style={[Estilo.input, { outlineWidth: 0 }]} 
                             onChangeText={onChangeText}
                             value={text}
                             placeholder="Pesquise o nome do curso"
@@ -49,7 +50,7 @@ export default function curso() {
                         />
                         <View style={Estilo.imgSearch}>
                             <Pressable>
-                                <Image source={require('@/assets/images/lupa.png')} />
+                               <Icon name="magnifying-glass" solid color={'#7F8FAF'} size={27}/>
                             </Pressable>
                         </View>
                     </View>
