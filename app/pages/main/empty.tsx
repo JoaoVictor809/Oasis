@@ -10,9 +10,8 @@ const EmptyCourses: React.FC = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <Pressable 
-      style={{}}>
-      <Icon name="xmark" solid size={30} color={'#000'} />
+      <Pressable onPress={() => router.push('../')} style={styles.back}>
+      <Icon name="arrow-left" solid size={30} color={'#0E4DB0'} />
 
       </Pressable>
       <Text style={styles.title}>

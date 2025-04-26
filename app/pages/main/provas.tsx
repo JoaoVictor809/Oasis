@@ -7,6 +7,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import EnemLista from '../../../components/enemList';
 import UnicampLista from '../../../components/unicampList' 
 import BdbLista from '../../../components/bdbList'
+import Icon from 'react-native-vector-icons/FontAwesome6'; 
 
 const { height } = Dimensions.get('window');
 export default function prova() {
@@ -42,7 +43,7 @@ export default function prova() {
                             keyboardType="emailAddress" />
                         <View style={Estilo.imgSearch}>
                             <Pressable>
-                                <Image source={require('../../../assets/images/lupa.png')} />
+                                <Icon name="magnifying-glass" solid color={'#7F8FAF'} size={27}/>
                             </Pressable>
                         </View>
                     </View>
