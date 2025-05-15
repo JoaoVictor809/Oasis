@@ -52,12 +52,12 @@ export default function pag2() {
             <View style={Estilo.container002}>
                 <Pressable>
                 <Link href={'/'}>
-                <Text style={Estilo.back}>Back</Text>
+                <Text style={Estilo.back}>Voltar</Text>
                 </Link>
                 </Pressable>
                 <Pressable>
                 <Link href={'./splashInfo002'}>
-                <Text style={Estilo.next}>Next</Text>
+                <Text style={Estilo.next}>Próximo</Text>
                 </Link>
                 </Pressable>
             </View>
