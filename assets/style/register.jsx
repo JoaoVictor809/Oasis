@@ -62,7 +62,7 @@ export default StyleSheet.create({
         width:"75%",
         borderRadius:20,
         backgroundColor:"#585454af",
-        color:'#1261D7',
+        color:'#fff',
         fontFamily:'Poppins_Regular',
         borderWidth: 0, 
         outlineWidth: 0, 
