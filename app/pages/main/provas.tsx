@@ -40,7 +40,7 @@ export default function prova() {
                             onChangeText={onChangeText}
                             value={text}
                             placeholder="Pesquise o nome da prova"
-                            keyboardType="emailAddress" />
+                            keyboardType="default" />
                         <View style={Estilo.imgSearch}>
                             <Pressable>
                                 <Icon name="magnifying-glass" solid color={'#7F8FAF'} size={27}/>
