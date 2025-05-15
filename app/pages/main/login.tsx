@@ -28,7 +28,7 @@ export default function LoginScreen() {
       await AsyncStorage.setItem('userToken', data.token);
 
       console.log('Login realizado com sucesso!');
-      router.push('/'); // Redireciona para a tela principal
+      router.push('/index'); 
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         const status = error.response?.status;
