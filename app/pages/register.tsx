@@ -1,5 +1,5 @@
-import { StyleSheet, View, Text, ImageBackground, Pressable, SafeAreaView, TextInput, Image } from 'react-native'
-import Estilo from '../../assets/style/register'
+import { StyleSheet, View, Text, ImageBackground, Pressable, SafeAreaView, TextInput, Image } from 'react-native';
+import Estilo from '../../assets/style/register';
 import { Link } from "expo-router";
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useState, useEffect } from 'react';
@@ -7,9 +7,9 @@ import { useFonts } from "expo-font";
 import { useRouter } from "expo-router";
 import { TextInputMask } from 'react-native-masked-text';
 import { registerUser } from '../../services/hooks/useRegister';
+import Loader from '../../components/Loader/loader';
 
 SplashScreen.preventAutoHideAsync();
-
 
 const formatarData = (data: string): string => {
   const partes = data.split('/');
@@ -28,6 +28,7 @@ export default function Register() {
   const [email, onChangeEmail] = useState('');
   const [data, onChangeData] = useState('');
   const [senha, onChangeSenha] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const [fontsLoaded] = useFonts({
     'MinhaFonte-Regular': require('../../assets/fonts/superOcean.ttf'),
@@ -44,6 +45,15 @@ export default function Register() {
 
   if (!fontsLoaded) {
     return null;
+  }
+
+  // Mostrar o Loader enquanto está sendo carregado
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Loader />
+      </View>
+    );
   }
 
   return (
@@ -130,6 +140,7 @@ export default function Register() {
             style={{ width: '75%', paddingTop: 10 }}
             onPress={async () => {
               try {
+                setLoading(true); // Exibe o loader enquanto o cadastro está sendo feito
                 const user = {
                   name,
                   cpf,
@@ -139,10 +150,19 @@ export default function Register() {
                   password: senha
                 };
 
-                await registerUser(user);
-                alert("Cadastro realizado com sucesso!");
-                router.push("/pages/main/login");
+                // Simulação de cadastro
+                await registerUser(user); // Função que faz o registro do usuário
+                
+                // Exibe a mensagem no log
+                console.log("Cadastro realizado com sucesso!");
+
+                // Fica com o loader por 4 segundos
+                setTimeout(() => {
+                  setLoading(false); // Esconde o loader
+                  router.push("/pages/main/login"); // Navega para a tela de login
+                }, 4000); // 4 segundos de delay antes de esconder o loader e navegar
               } catch (error) {
+                setLoading(false); // Esconde o loader em caso de erro
                 console.error(error);
                 alert("Erro ao cadastrar. Verifique os dados e tente novamente.");
               }

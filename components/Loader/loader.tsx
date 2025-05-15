@@ -1,12 +1,16 @@
 import React from 'react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { View } from 'react-native';
 
-const App = () => {
+export default function App() {
   return (
-    <DotLottieReact
-      src="https://lottie.host/8df04196-6abc-48d2-8f8e-cf88742d0816/M4MlGDFYWd.lottie"
-      loop
-      autoplay
-    />
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <DotLottieReact
+        src="https://lottie.host/044108e2-0678-4e0e-86de-3f95612aa281/hsxo6FOPUe.lottie"
+        loop
+        autoplay
+        style={{ width: "100%", height: "100%" }}  
+      />
+    </View>
   );
-};
+}
