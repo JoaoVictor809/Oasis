@@ -22,7 +22,7 @@ export default function bdbList() {
     }
     return (
         <View>
-            <Text style={styles.title}>Tecnologia da informação <br /> e informática</Text>
+            <Text style={styles.title}>Tecnologia da informação <br /> e informtica</Text>
             <ScrollView horizontal={true} style={styles.container} showsHorizontalScrollIndicator={false}>
                 <View style={styles.containerCurso}>
                                 <View style={styles.descriCurso}>
