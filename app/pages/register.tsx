@@ -28,6 +28,7 @@ export default function Register() {
   const [email, onChangeEmail] = useState('');
   const [data, onChangeData] = useState('');
   const [senha, onChangeSenha] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   const [fontsLoaded] = useFonts({
@@ -136,11 +137,20 @@ export default function Register() {
             keyboardType="default"
           />
 
+          <TextInput
+            style= {Estilo.input}
+            onChangeText= {setConfirmPassword}
+            value= {confirmPassword}
+            placeholder="Confirme a senha"
+            secureTextEntry
+            keyboardType="default"
+          />
+
           <Pressable
             style={{ width: '75%', paddingTop: 10 }}
             onPress={async () => {
               try {
-                setLoading(true); // Exibe o loader enquanto o cadastro está sendo feito
+                setLoading(true); 
                 const user = {
                   name,
                   cpf,
@@ -151,18 +161,18 @@ export default function Register() {
                 };
 
                 // Simulação de cadastro
-                await registerUser(user); // Função que faz o registro do usuário
+                await registerUser(user); 
                 
-                // Exibe a mensagem no log
+                
                 console.log("Cadastro realizado com sucesso!");
 
-                // Fica com o loader por 4 segundos
+                
                 setTimeout(() => {
-                  setLoading(false); // Esconde o loader
-                  router.push("/pages/main/login"); // Navega para a tela de login
-                }, 4000); // 4 segundos de delay antes de esconder o loader e navegar
+                  setLoading(false); 
+                  router.push("/pages/main/login"); 
+                }, 4000); 
               } catch (error) {
-                setLoading(false); // Esconde o loader em caso de erro
+                setLoading(false); 
                 console.error(error);
                 alert("Erro ao cadastrar. Verifique os dados e tente novamente.");
               }
