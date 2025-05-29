@@ -8,7 +8,7 @@ import { useRouter } from "expo-router";
 import { TextInputMask } from 'react-native-masked-text';
 import { registerUser } from '../../services/hooks/useRegister';
 import Loader from '../../components/Loader/loader';
-import Icon from 'react-native-vector-icons/FontAwesome6'; 
+import Icon from 'react-native-vector-icons/FontAwesome6';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -132,26 +132,28 @@ export default function Register() {
             keyboardType="numeric"
           />
 
-          <View>
-          <TextInput
-            style={Estilo.input}
-            onChangeText={setPassword}
-            value={password}
-            placeholder="Senha"
-            secureTextEntry={!showPassword}
-            keyboardType="default"
-          />
-          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <Icon name={showPassword ? 'eye-slash' : 'eye'} size={24} color="#000" />
-          </TouchableOpacity>
+          <View style={Estilo.boxInput}>
+            <TextInput
+              style={Estilo.inputPassword}
+              onChangeText={setPassword}
+              value={password}
+              placeholder="Senha"
+              secureTextEntry={!showPassword}
+              keyboardType="default"
+            />
+            {password.length > 0 && (
+              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                <Icon name={showPassword ? 'eye-slash' : 'eye'} size={24} color="#FFF" />
+              </TouchableOpacity>
+            )}
           </View>
 
           <TextInput
-            style= {Estilo.input}
-            onChangeText= {setConfirmPassword}
-            value= {confirmPassword}
+            style={Estilo.input}
+            onChangeText={setConfirmPassword}
+            value={confirmPassword}
             placeholder="Confirme a senha"
-            secureTextEntry
+            secureTextEntry={!showPassword}
             keyboardType="default"
           />
 
@@ -159,7 +161,7 @@ export default function Register() {
             style={{ width: '75%', paddingTop: 10 }}
             onPress={async () => {
               try {
-                setLoading(true); 
+                setLoading(true);
                 const user = {
                   name,
                   cpf,
@@ -170,18 +172,18 @@ export default function Register() {
                 };
 
                 // Simulação de cadastro
-                await registerUser(user); 
-                
-                
+                await registerUser(user);
+
+
                 console.log("Cadastro realizado com sucesso!");
 
-                
+
                 setTimeout(() => {
-                  setLoading(false); 
-                  router.push("/pages/main/login"); 
-                }, 4000); 
+                  setLoading(false);
+                  router.push("/pages/main/login");
+                }, 4000);
               } catch (error) {
-                setLoading(false); 
+                setLoading(false);
                 console.error(error);
                 alert("Erro ao cadastrar. Verifique os dados e tente novamente.");
               }
