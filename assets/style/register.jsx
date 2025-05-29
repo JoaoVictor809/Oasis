@@ -92,5 +92,27 @@ export default StyleSheet.create({
       fontFamily:'Poppins_Regular',
       display:'flex',
       fontWeight:'bold'
+    },
+    boxInput:{
+        display:'flex',
+        flexDirection:'row',
+        alignItems:'center',
+        width:"75%",
+        borderRadius:20,
+        backgroundColor:"#585454af",
+        justifyContent:'space-between',
+        paddingRight:15
+    },
+    inputPassword:{
+        height: 45,
+        padding: 10,
+        width:"75%",
+        borderRadius:20,
+        color:'#fff',
+        fontFamily:'Poppins_Regular',
+        borderWidth: 0, 
+        outlineWidth: 0, 
+        fontWeight:'bold',
+        fontSize:19
     }
 })
