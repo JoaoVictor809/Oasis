@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, ImageBackground, Pressable, SafeAreaView, TextInput, Image } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, Pressable, SafeAreaView, TextInput, Image, TouchableOpacity } from 'react-native';
 import Estilo from '../../assets/style/register';
 import { Link } from "expo-router";
 import * as SplashScreen from 'expo-splash-screen';
@@ -8,6 +8,7 @@ import { useRouter } from "expo-router";
 import { TextInputMask } from 'react-native-masked-text';
 import { registerUser } from '../../services/hooks/useRegister';
 import Loader from '../../components/Loader/loader';
+import Icon from 'react-native-vector-icons/FontAwesome6'; 
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,9 +28,12 @@ export default function Register() {
   const [endereco, onChangeEndereco] = useState('');
   const [email, onChangeEmail] = useState('');
   const [data, onChangeData] = useState('');
-  const [senha, onChangeSenha] = useState('');
+  const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
+
+  //mostrar e ocultar a senha 
+  const [showPassword, setShowPassword] = useState(false);
 
   const [fontsLoaded] = useFonts({
     'MinhaFonte-Regular': require('../../assets/fonts/superOcean.ttf'),
@@ -128,14 +132,19 @@ export default function Register() {
             keyboardType="numeric"
           />
 
+          <View>
           <TextInput
             style={Estilo.input}
-            onChangeText={onChangeSenha}
-            value={senha}
+            onChangeText={setPassword}
+            value={password}
             placeholder="Senha"
-            secureTextEntry
+            secureTextEntry={!showPassword}
             keyboardType="default"
           />
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <Icon name={showPassword ? 'eye-slash' : 'eye'} size={24} color="#000" />
+          </TouchableOpacity>
+          </View>
 
           <TextInput
             style= {Estilo.input}
@@ -157,7 +166,7 @@ export default function Register() {
                   endereco,
                   email,
                   data_nascimento: formatarData(data),
-                  password: senha
+                  password: password
                 };
 
                 // Simulação de cadastro
