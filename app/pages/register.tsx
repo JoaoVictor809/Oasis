@@ -1,4 +1,14 @@
-import { StyleSheet, View, Text, ImageBackground, Pressable, SafeAreaView, TextInput, Image, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ImageBackground,
+  Pressable,
+  SafeAreaView,
+  TextInput,
+  Image,
+  TouchableOpacity
+} from 'react-native';
 import Estilo from '../../assets/style/register';
 import { Link } from "expo-router";
 import * as SplashScreen from 'expo-splash-screen';
@@ -31,9 +41,8 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
-
-  //mostrar e ocultar a senha 
   const [showPassword, setShowPassword] = useState(false);
+  const [errorPassword, setErrorPassword] = useState('');
 
   const [fontsLoaded] = useFonts({
     'MinhaFonte-Regular': require('../../assets/fonts/superOcean.ttf'),
@@ -48,11 +57,8 @@ export default function Register() {
     }
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-    return null;
-  }
+  if (!fontsLoaded) return null;
 
-  // Mostrar o Loader enquanto está sendo carregado
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -132,21 +138,38 @@ export default function Register() {
             keyboardType="numeric"
           />
 
+          {/* Campo de senha com validação */}
           <View style={Estilo.boxInput}>
             <TextInput
               style={Estilo.inputPassword}
-              onChangeText={setPassword}
+              onChangeText={(text) => {
+                setPassword(text);
+                const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(text);
+                if (text.length === 0) {
+                  setErrorPassword('');
+                } else if (!hasSpecialChar) {
+                  setErrorPassword('A senha precisa conter pelo menos um caractere especial.');
+                } else {
+                  setErrorPassword('');
+                }
+              }}
               value={password}
               placeholder="Senha"
               secureTextEntry={!showPassword}
               keyboardType="default"
+              placeholderTextColor="#ccc"
             />
             {password.length > 0 && (
-              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+              <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: 10, top: 10 }}>
                 <Icon name={showPassword ? 'eye-slash' : 'eye'} size={24} color="#FFF" />
               </TouchableOpacity>
             )}
           </View>
+
+          {/* Mensagem de erro */}
+          {errorPassword !== '' && (
+            <Text style={{ color: 'red', marginTop: 5 }}>{errorPassword}</Text>
+          )}
 
           <TextInput
             style={Estilo.input}
@@ -171,12 +194,9 @@ export default function Register() {
                   password: password
                 };
 
-                // Simulação de cadastro
                 await registerUser(user);
 
-
                 console.log("Cadastro realizado com sucesso!");
-
 
                 setTimeout(() => {
                   setLoading(false);
@@ -201,7 +221,6 @@ export default function Register() {
             <Text style={[Estilo.textLogin, { borderBottomWidth: 2, borderColor: '#1261D7' }]}>Entrar</Text>
           </Pressable>
         </View>
-
       </View>
 
       <View style={Estilo.container002}>
