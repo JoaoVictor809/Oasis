@@ -41,18 +41,18 @@ export default StyleSheet.create({
     },
     back:{
         fontSize:25,
-        fontFamily:'MinhaFonte-Regular',
+        fontFamily:'Poppins_Bold',
         color:'#000'
     },
     next:{
         fontSize:25,
-        fontFamily:'MinhaFonte-Regular',
+        fontFamily:'Poppins_Bold',
         color:'#1261D7'
     },
     container002:{
         display:'flex',
         flexDirection:'row',
-        justifyContent:'space-between', // Mudança aqui
+        justifyContent:'space-between',
         paddingHorizontal: 10,
         marginBottom: 20,
     }
