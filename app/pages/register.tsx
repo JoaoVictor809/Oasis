@@ -1,4 +1,14 @@
-import { StyleSheet, View, Text, ImageBackground, Pressable, SafeAreaView, TextInput, Image } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ImageBackground,
+  Pressable,
+  SafeAreaView,
+  TextInput,
+  Image,
+  TouchableOpacity
+} from 'react-native';
 import Estilo from '../../assets/style/register';
 import { Link } from "expo-router";
 import * as SplashScreen from 'expo-splash-screen';
@@ -8,6 +18,7 @@ import { useRouter } from "expo-router";
 import { TextInputMask } from 'react-native-masked-text';
 import { registerUser } from '../../services/hooks/useRegister';
 import Loader from '../../components/Loader/loader';
+import Icon from 'react-native-vector-icons/FontAwesome6';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,8 +38,12 @@ export default function Register() {
   const [endereco, onChangeEndereco] = useState('');
   const [email, onChangeEmail] = useState('');
   const [data, onChangeData] = useState('');
-  const [senha, onChangeSenha] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorPassword, setErrorPassword] = useState('');
+  const [errorConfirmPassword, setErrorConfirmPassword] = useState('');
 
   const [fontsLoaded] = useFonts({
     'MinhaFonte-Regular': require('../../assets/fonts/superOcean.ttf'),
@@ -43,11 +58,8 @@ export default function Register() {
     }
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-    return null;
-  }
+  if (!fontsLoaded) return null;
 
-  // Mostrar o Loader enquanto está sendo carregado
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -127,42 +139,88 @@ export default function Register() {
             keyboardType="numeric"
           />
 
+          {/* Campo de senha com validação */}
+          <View style={Estilo.boxInput}>
+            <TextInput
+              style={Estilo.inputPassword}
+              onChangeText={(text) => {
+                setPassword(text);
+                const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(text);
+                if (text.length === 0) {
+                  setErrorPassword('');
+                } else if(text.length < 8 && !hasSpecialChar){
+                  setErrorPassword('A senha deve conter 8 caracteres.')
+                } else if (!hasSpecialChar) {
+                  setErrorPassword('A senha precisa conter pelo menos um caractere especial.');
+                } else {
+                  setErrorPassword('');
+                }
+              }}
+              value={password}
+              placeholder="Senha"
+              secureTextEntry={!showPassword}
+              keyboardType="default"
+              placeholderTextColor="#fff"
+            />
+            {password.length > 0 && (
+              <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: 10, top: 10 }}>
+                <Icon name={showPassword ? 'eye-slash' : 'eye'} size={24} color="#FFF" />
+              </TouchableOpacity>
+            )}
+          </View>
+
+          {/* Mensagem de erro */}
+          {errorPassword !== '' && (
+            <Text style={{ color: 'red', marginTop: 5 }}>{errorPassword}</Text>
+          )}
+
           <TextInput
             style={Estilo.input}
-            onChangeText={onChangeSenha}
-            value={senha}
-            placeholder="Senha"
-            secureTextEntry
+            onChangeText={(confirmText) =>{
+              setConfirmPassword(confirmText);
+              const Text = password;
+              if(confirmText.length === 0){
+                setErrorConfirmPassword('')
+              } else if (confirmText != Text){
+                setErrorConfirmPassword('As senhas não coincidem.')
+              }else{
+                setErrorConfirmPassword('')
+              }
+            }}
+            value={confirmPassword}
+            placeholder="Confirme a senha"
+            secureTextEntry={!showPassword}
             keyboardType="default"
           />
+          {/* Mensagem de erro  de confirmação*/}
+          {errorConfirmPassword !== '' && (
+            <Text style={{ color: 'red', marginTop: 5 }}>{errorConfirmPassword}</Text>
+          )}
 
           <Pressable
             style={{ width: '75%', paddingTop: 10 }}
             onPress={async () => {
               try {
-                setLoading(true); // Exibe o loader enquanto o cadastro está sendo feito
+                setLoading(true);
                 const user = {
                   name,
                   cpf,
                   endereco,
                   email,
                   data_nascimento: formatarData(data),
-                  password: senha
+                  password: password
                 };
 
-                // Simulação de cadastro
-                await registerUser(user); // Função que faz o registro do usuário
-                
-                // Exibe a mensagem no log
+                await registerUser(user);
+
                 console.log("Cadastro realizado com sucesso!");
 
-                // Fica com o loader por 4 segundos
                 setTimeout(() => {
-                  setLoading(false); // Esconde o loader
-                  router.push("/pages/main/login"); // Navega para a tela de login
-                }, 4000); // 4 segundos de delay antes de esconder o loader e navegar
+                  setLoading(false);
+                  router.push("/pages/main/login");
+                }, 4000);
               } catch (error) {
-                setLoading(false); // Esconde o loader em caso de erro
+                setLoading(false);
                 console.error(error);
                 alert("Erro ao cadastrar. Verifique os dados e tente novamente.");
               }
@@ -180,7 +238,6 @@ export default function Register() {
             <Text style={[Estilo.textLogin, { borderBottomWidth: 2, borderColor: '#1261D7' }]}>Entrar</Text>
           </Pressable>
         </View>
-
       </View>
 
       <View style={Estilo.container002}>

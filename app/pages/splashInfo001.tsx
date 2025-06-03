@@ -10,8 +10,8 @@ SplashScreen.preventAutoHideAsync();
 
 export default function pag2() {
     const [fontsLoaded] = useFonts({
-        'MinhaFonte-Regular': require('../../assets/fonts/superOcean.ttf'),
-        'Fonte-texto': require('../../assets/fonts/TitilliumWeb-Regular.ttf')
+        'Poppins_Regular': require('../../assets/fonts/poppins/Poppins-Regular.ttf'),
+        'Poppins_Bold': require('../../assets/fonts/poppins/Poppins-Bold.ttf')
 
     });
 
