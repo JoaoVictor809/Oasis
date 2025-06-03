@@ -43,6 +43,7 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [errorPassword, setErrorPassword] = useState('');
+  const [errorConfirmPassword, setErrorConfirmPassword] = useState('');
 
   const [fontsLoaded] = useFonts({
     'MinhaFonte-Regular': require('../../assets/fonts/superOcean.ttf'),
@@ -147,6 +148,8 @@ export default function Register() {
                 const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(text);
                 if (text.length === 0) {
                   setErrorPassword('');
+                } else if(text.length < 8 && !hasSpecialChar){
+                  setErrorPassword('A senha deve conter 8 caracteres.')
                 } else if (!hasSpecialChar) {
                   setErrorPassword('A senha precisa conter pelo menos um caractere especial.');
                 } else {
@@ -157,7 +160,7 @@ export default function Register() {
               placeholder="Senha"
               secureTextEntry={!showPassword}
               keyboardType="default"
-              placeholderTextColor="#ccc"
+              placeholderTextColor="#fff"
             />
             {password.length > 0 && (
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: 10, top: 10 }}>
@@ -173,12 +176,26 @@ export default function Register() {
 
           <TextInput
             style={Estilo.input}
-            onChangeText={setConfirmPassword}
+            onChangeText={(confirmText) =>{
+              setConfirmPassword(confirmText);
+              const Text = password;
+              if(confirmText.length === 0){
+                setErrorConfirmPassword('')
+              } else if (confirmText != Text){
+                setErrorConfirmPassword('As senhas não coincidem.')
+              }else{
+                setErrorConfirmPassword('')
+              }
+            }}
             value={confirmPassword}
             placeholder="Confirme a senha"
             secureTextEntry={!showPassword}
             keyboardType="default"
           />
+          {/* Mensagem de erro  de confirmação*/}
+          {errorConfirmPassword !== '' && (
+            <Text style={{ color: 'red', marginTop: 5 }}>{errorConfirmPassword}</Text>
+          )}
 
           <Pressable
             style={{ width: '75%', paddingTop: 10 }}
