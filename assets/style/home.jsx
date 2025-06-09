@@ -30,7 +30,7 @@ export default StyleSheet.create({
     subtitle: {
         fontSize: 16,
         marginBottom: 20, 
-        fontWeight:300,
+        fontFamily: 'Poppins_Light',
     },
     subtitlePrincipal: {
         fontSize: 18,
@@ -154,6 +154,13 @@ export default StyleSheet.create({
         top:-90,
         zIndex:-155,
         right:0
+    },
+    scrollViewContent: {
+        borderWidth: 0,
+    },
+    scrollViewContentWithPadding: {
+        paddingBottom: 80,
+        borderWidth: 0,
     }
  
 });
