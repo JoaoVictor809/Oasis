@@ -7,6 +7,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Link } from "expo-router";
+import ActivityCalendar from '../../../components/ActivityCalendar';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -16,11 +17,67 @@ const UserDashboard = () => {
     "Poppins_Bold": require("../../../assets/fonts/poppins/Poppins-Bold.ttf"),
   });
 
+  // States for activity calendar
+  const [activityData, setActivityData] = useState({});
+  const [isLoadingCalendar, setIsLoadingCalendar] = useState(true);
+  const [calendarError, setCalendarError] = useState<string | null>(null);
+  const [currentCalendarMonth, setCurrentCalendarMonth] = useState(new Date().toISOString().slice(0, 7)); // YYYY-MM
+
   useEffect(() => {
     if (fontsLoaded) {
       SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
+
+  const fetchPracticeData = async (userId: string, month: string) => {
+    setIsLoadingCalendar(true);
+    setCalendarError(null);
+    try {
+      // SIMULANDO CHAMADA DE API
+      console.log(`Fetching data for userId: ${userId}, month: ${month}`);
+      // Substitua pela sua lógica de chamada de API real. Ex:
+      // const response = await axios.get(`https://api.example.com/user/${userId}/practice-log?month=${month}`);
+      // const data = response.data.data; // Assumindo que os dados estão em response.data.data
+
+      // Dados mockados para simulação - SUBSTITUA QUANDO A API ESTIVER PRONTA
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simula delay da rede
+      const mockApiResponse = [
+        { date: `${month}-10`, activities: ["lição"], summary: "Lição de Matemática" },
+        { date: `${month}-15`, activities: ["vídeo", "exercício"], summary: "Vídeo de História e Exercícios" },
+        { date: `${month}-22`, activities: ["lição", "exercício"], summary: "Lição de Física e Exercícios" },
+      ];
+
+      // Filtrar dados para o mês atual para evitar problemas com datas inválidas se o mock for genérico
+      const filteredData = mockApiResponse.filter(item => item.date.startsWith(month));
+
+      // Formatar dados para o ActivityCalendar
+      const formattedData = filteredData.reduce((acc, item) => {
+        acc[item.date] = {
+          customStyles: {
+            container: { backgroundColor: '#1261D7', borderRadius: 5, padding: 2 },
+            text: { color: 'white', fontSize: 10, fontWeight: 'bold' },
+          },
+        };
+        return acc;
+      }, {});
+
+      setActivityData(formattedData);
+
+    } catch (error) {
+      console.error("Failed to fetch practice data:", error);
+      setCalendarError("Não foi possível carregar os dados de frequência.");
+      setActivityData({}); // Limpa dados em caso de erro
+    } finally {
+      setIsLoadingCalendar(false);
+    }
+  };
+
+  useEffect(() => {
+    const userId = "123"; // Obtenha o ID do usuário logado aqui
+    if (fontsLoaded) { // Ensure fonts are loaded before fetching data that might rely on custom fonts in calendar
+        fetchPracticeData(userId, currentCalendarMonth);
+    }
+  }, [currentCalendarMonth, fontsLoaded]); // Re-executa quando currentCalendarMonth ou fontsLoaded muda
 
   if (!fontsLoaded) {
     return <ActivityIndicator size="large" color="#1261D7" style={styles.loading} />;
@@ -83,6 +140,23 @@ const UserDashboard = () => {
           <Text style={styles.sectionText}>- Revisar 3 capítulos de Matemática</Text>
           <Text style={styles.sectionText}>- Resolver 10 questões de Física</Text>
           <Text style={styles.sectionText}>- Fazer 2 redações</Text>
+        </View>
+
+        {/* Calendário de Atividades */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Minha Frequência</Text>
+          {isLoadingCalendar && <ActivityIndicator size="small" color="#1261D7" style={{ marginVertical: 10 }} />}
+          {calendarError && <Text style={{ color: 'red', textAlign: 'center', marginVertical: 10 }}>{calendarError}</Text>}
+          {!isLoadingCalendar && !calendarError && (
+            <ActivityCalendar
+              initialMonth={currentCalendarMonth}
+              markedDates={activityData}
+              onDayPress={(day) => console.log(`Dia selecionado no perfil: ${day}`)}
+              onMonthChange={(newMonth) => {
+                setCurrentCalendarMonth(newMonth); // Assuming newMonth is already 'YYYY-MM'
+              }}
+            />
+          )}
         </View>
 
         {/* Botões */}
