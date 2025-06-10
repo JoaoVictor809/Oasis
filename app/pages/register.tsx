@@ -34,7 +34,7 @@ const formatarData = (data: string): string => {
 export default function Register() {
   const router = useRouter();
   const [name, onChangeName] = useState('');
-  const [cpf, onChangeCpf] = useState('');
+  const [cpf, setCpf] = useState('');
   const [endereco, onChangeEndereco] = useState('');
   const [email, onChangeEmail] = useState('');
   const [data, onChangeData] = useState('');
@@ -44,6 +44,7 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [errorPassword, setErrorPassword] = useState('');
   const [errorConfirmPassword, setErrorConfirmPassword] = useState('');
+  const [errorCpf, setErrorCpf] = useState('');
 
   const [fontsLoaded] = useFonts({
     'MinhaFonte-Regular': require('../../assets/fonts/superOcean.ttf'),
@@ -51,6 +52,39 @@ export default function Register() {
     'Poppins_Regular': require('../../assets/fonts/poppins/Poppins-Regular.ttf'),
     'Poppins_Bold': require('../../assets/fonts/poppins/Poppins-Bold.ttf')
   });
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const handleSubmit =(async() =>{
+    if(!emailRegex.test(email)){
+      alert('Email invalido')
+    } else{
+      try {
+        setLoading(true);
+        const user = {
+          name,
+          cpf,
+          endereco,
+          email,
+          data_nascimento: formatarData(data),
+          password: password
+        };
+
+        await registerUser(user);
+
+        console.log("Cadastro realizado com sucesso!");
+
+        setTimeout(() => {
+          setLoading(false);
+          router.push("/pages/main/login");
+        }, 4000);
+      } catch (error) {
+        setLoading(false);
+        console.error(error);
+        alert("Erro ao cadastrar. Verifique os dados e tente novamente.");
+      } 
+    }
+  })
 
   useEffect(() => {
     if (fontsLoaded) {
@@ -107,11 +141,28 @@ export default function Register() {
 
           <TextInput
             style={Estilo.input}
-            onChangeText={onChangeCpf}
+            onChangeText={(text) => {
+              // Remove qualquer caractere que não seja número
+              const numericText = text.replace(/[^0-9]/g, '');
+              setCpf(numericText);
+
+              // Validação
+              if (numericText.length === 0) {
+                setCpf('');
+              } else if (numericText.length < 11) {
+                setErrorCpf('O CPF deve conter 11 caracteres.');
+              } else {
+                setErrorCpf('');
+              }
+            }}
             value={cpf}
             placeholder="CPF"
             keyboardType="numeric"
           />
+          {/* Mensagem de erro cpf */}
+          {errorCpf !== '' && (
+            <Text style={{ color: 'red', marginTop: 5, fontFamily: 'Poppins_Bold' }}>{errorCpf}</Text>
+          )}
 
           <TextInput
             style={Estilo.input}
@@ -148,7 +199,7 @@ export default function Register() {
                 const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(text);
                 if (text.length === 0) {
                   setErrorPassword('');
-                } else if(text.length < 8 && !hasSpecialChar){
+                } else if (text.length < 8 && !hasSpecialChar) {
                   setErrorPassword('A senha deve conter 8 caracteres.')
                 } else if (!hasSpecialChar) {
                   setErrorPassword('A senha precisa conter pelo menos um caractere especial.');
@@ -171,19 +222,19 @@ export default function Register() {
 
           {/* Mensagem de erro */}
           {errorPassword !== '' && (
-            <Text style={{ color: 'red', marginTop: 5 }}>{errorPassword}</Text>
+            <Text style={{ color: 'red', marginTop: 5, fontFamily: 'Poppins_Bold' }}>{errorPassword}</Text>
           )}
 
           <TextInput
             style={Estilo.input}
-            onChangeText={(confirmText) =>{
+            onChangeText={(confirmText) => {
               setConfirmPassword(confirmText);
               const Text = password;
-              if(confirmText.length === 0){
+              if (confirmText.length === 0) {
                 setErrorConfirmPassword('')
-              } else if (confirmText != Text){
+              } else if (confirmText != Text) {
                 setErrorConfirmPassword('As senhas não coincidem.')
-              }else{
+              } else {
                 setErrorConfirmPassword('')
               }
             }}
@@ -199,32 +250,7 @@ export default function Register() {
 
           <Pressable
             style={{ width: '75%', paddingTop: 10 }}
-            onPress={async () => {
-              try {
-                setLoading(true);
-                const user = {
-                  name,
-                  cpf,
-                  endereco,
-                  email,
-                  data_nascimento: formatarData(data),
-                  password: password
-                };
-
-                await registerUser(user);
-
-                console.log("Cadastro realizado com sucesso!");
-
-                setTimeout(() => {
-                  setLoading(false);
-                  router.push("/pages/main/login");
-                }, 4000);
-              } catch (error) {
-                setLoading(false);
-                console.error(error);
-                alert("Erro ao cadastrar. Verifique os dados e tente novamente.");
-              }
-            }}
+            onPress={handleSubmit}
           >
             <View style={Estilo.enter}>
               <Text style={{ fontFamily: "Poppins_Bold", color: "#fff", fontSize: 20 }}>Cadastrar</Text>
