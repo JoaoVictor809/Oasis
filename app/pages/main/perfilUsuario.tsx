@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Dimensions, ActivityIndicator, Pressable } from "react-native";
+import {
+  View, Text, Image, StyleSheet, ScrollView,
+  TouchableOpacity, Dimensions, ActivityIndicator, Pressable
+} from "react-native";
 import { BarChart } from "react-native-chart-kit";
 import { ProgressBar } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
@@ -17,40 +20,28 @@ const UserDashboard = () => {
     "Poppins_Bold": require("../../../assets/fonts/poppins/Poppins-Bold.ttf"),
   });
 
-  // States for activity calendar
   const [activityData, setActivityData] = useState({});
   const [isLoadingCalendar, setIsLoadingCalendar] = useState(true);
   const [calendarError, setCalendarError] = useState<string | null>(null);
-  const [currentCalendarMonth, setCurrentCalendarMonth] = useState(new Date().toISOString().slice(0, 7)); // YYYY-MM
+  const [currentCalendarMonth, setCurrentCalendarMonth] = useState(new Date().toISOString().slice(0, 7));
 
   useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
+    if (fontsLoaded) SplashScreen.hideAsync();
   }, [fontsLoaded]);
 
   const fetchPracticeData = async (userId: string, month: string) => {
     setIsLoadingCalendar(true);
     setCalendarError(null);
     try {
-      // SIMULANDO CHAMADA DE API
       console.log(`Fetching data for userId: ${userId}, month: ${month}`);
-      // Substitua pela sua lógica de chamada de API real. Ex:
-      // const response = await axios.get(`https://api.example.com/user/${userId}/practice-log?month=${month}`);
-      // const data = response.data.data; // Assumindo que os dados estão em response.data.data
-
-      // Dados mockados para simulação - SUBSTITUA QUANDO A API ESTIVER PRONTA
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simula delay da rede
+      await new Promise(resolve => setTimeout(resolve, 1000));
       const mockApiResponse = [
         { date: `${month}-10`, activities: ["lição"], summary: "Lição de Matemática" },
         { date: `${month}-15`, activities: ["vídeo", "exercício"], summary: "Vídeo de História e Exercícios" },
         { date: `${month}-22`, activities: ["lição", "exercício"], summary: "Lição de Física e Exercícios" },
       ];
 
-      // Filtrar dados para o mês atual para evitar problemas com datas inválidas se o mock for genérico
       const filteredData = mockApiResponse.filter(item => item.date.startsWith(month));
-
-      // Formatar dados para o ActivityCalendar
       const formattedData = filteredData.reduce((acc, item) => {
         acc[item.date] = {
           customStyles: {
@@ -59,25 +50,22 @@ const UserDashboard = () => {
           },
         };
         return acc;
-      }, {});
+      }, {} as any);
 
       setActivityData(formattedData);
-
     } catch (error) {
       console.error("Failed to fetch practice data:", error);
       setCalendarError("Não foi possível carregar os dados de frequência.");
-      setActivityData({}); // Limpa dados em caso de erro
+      setActivityData({});
     } finally {
       setIsLoadingCalendar(false);
     }
   };
 
   useEffect(() => {
-    const userId = "123"; // Obtenha o ID do usuário logado aqui
-    if (fontsLoaded) { // Ensure fonts are loaded before fetching data that might rely on custom fonts in calendar
-        fetchPracticeData(userId, currentCalendarMonth);
-    }
-  }, [currentCalendarMonth, fontsLoaded]); // Re-executa quando currentCalendarMonth ou fontsLoaded muda
+    const userId = "123";
+    if (fontsLoaded) fetchPracticeData(userId, currentCalendarMonth);
+  }, [currentCalendarMonth, fontsLoaded]);
 
   if (!fontsLoaded) {
     return <ActivityIndicator size="large" color="#1261D7" style={styles.loading} />;
@@ -91,7 +79,6 @@ const UserDashboard = () => {
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      {/* Cabeçalho */}
       <View style={styles.header}>
         <Pressable>
           <Link href={'../'}>
@@ -101,20 +88,17 @@ const UserDashboard = () => {
         <Text style={styles.headerTitle}>Página Inicial</Text>
       </View>
 
-      {/* Conteúdo */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.profileSection}>
           <Image source={{ uri: "" }} style={styles.profilePic} />
           <Text style={styles.userName}>Olá, Estudante!</Text>
         </View>
 
-        {/* Estatísticas */}
         <View style={styles.statsCard}>
           <Text style={styles.sectionTitle}>Progresso</Text>
           <ProgressBar progress={0.6} color="#1261D7" style={styles.progressBar} />
         </View>
 
-        {/* Gráfico */}
         <View style={styles.chartContainer}>
           <Text style={styles.chartTitle}>Tempo de Estudo (Horas)</Text>
           <BarChart
@@ -122,6 +106,7 @@ const UserDashboard = () => {
             width={screenWidth * 0.9}
             height={220}
             yAxisLabel=""
+            yAxisSuffix="" // ✅ Adicionado para corrigir erro de TypeScript
             chartConfig={{
               backgroundGradientFrom: "#1261D7",
               backgroundGradientTo: "#1261D7",
@@ -134,7 +119,6 @@ const UserDashboard = () => {
           />
         </View>
 
-        {/* Metas */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Metas da Semana</Text>
           <Text style={styles.sectionText}>- Revisar 3 capítulos de Matemática</Text>
@@ -142,7 +126,6 @@ const UserDashboard = () => {
           <Text style={styles.sectionText}>- Fazer 2 redações</Text>
         </View>
 
-        {/* Calendário de Atividades */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Minha Frequência</Text>
           {isLoadingCalendar && <ActivityIndicator size="small" color="#1261D7" style={{ marginVertical: 10 }} />}
@@ -153,13 +136,12 @@ const UserDashboard = () => {
               markedDates={activityData}
               onDayPress={(day) => console.log(`Dia selecionado no perfil: ${day}`)}
               onMonthChange={(newMonth) => {
-                setCurrentCalendarMonth(newMonth); // Assuming newMonth is already 'YYYY-MM'
+                setCurrentCalendarMonth(newMonth);
               }}
             />
           )}
         </View>
 
-        {/* Botões */}
         <TouchableOpacity style={styles.button}>
           <Ionicons name="person-circle-outline" size={24} color="#FFF" />
           <Text style={styles.buttonText}>Editar Perfil</Text>
@@ -178,9 +160,14 @@ const styles = StyleSheet.create({
   loading: { flex: 1, justifyContent: "center", alignItems: "center" },
   scrollContent: { paddingBottom: 20 },
   header: {
-    flexDirection: "row", alignItems: "center", padding: 15, backgroundColor: "#1261D7", borderBottomLeftRadius: 20,borderBottomRightRadius: 20},
+    flexDirection: "row", alignItems: "center", padding: 15,
+    backgroundColor: "#1261D7", borderBottomLeftRadius: 20, borderBottomRightRadius: 20
+  },
   backIcon: { width: 30, height: 30 },
-  headerTitle: { flex: 1, textAlign: "center", fontSize: 20, color: "#FFF", fontFamily: "Poppins_Bold" },
+  headerTitle: {
+    flex: 1, textAlign: "center", fontSize: 20,
+    color: "#FFF", fontFamily: "Poppins_Bold"
+  },
   profileSection: { alignItems: "center", marginVertical: 20 },
   profilePic: { width: 100, height: 100, borderRadius: 50 },
   userName: { fontSize: 22, fontFamily: "Poppins_Bold", marginTop: 10, textAlign: "center" },
@@ -191,7 +178,10 @@ const styles = StyleSheet.create({
   section: { backgroundColor: "#FFF", padding: 20, borderRadius: 20, marginBottom: 20 },
   sectionTitle: { fontSize: 18, textAlign: "center", color: "#1261D7", fontFamily: "Poppins_Bold" },
   sectionText: { color: "#1261D7", fontFamily: "Poppins_Regular", fontSize: 16, textAlign: "center" },
-  button: { flexDirection: "row", alignItems: "center", justifyContent: "center", backgroundColor: "#1261D7", padding: 15, borderRadius: 20, marginBottom: 10 },
+  button: {
+    flexDirection: "row", alignItems: "center", justifyContent: "center",
+    backgroundColor: "#1261D7", padding: 15, borderRadius: 20, marginBottom: 10
+  },
   buttonText: { color: "#fff", fontSize: 16, marginLeft: 10, fontFamily: "Poppins_Bold" },
 });
 
