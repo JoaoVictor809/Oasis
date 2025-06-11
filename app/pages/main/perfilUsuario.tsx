@@ -8,6 +8,7 @@ import { useFonts } from "expo-font";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Link } from "expo-router";
 import ActivityCalendar from '../../../components/ActivityCalendar';
+import DayActivityDetails, { DetailedActivity } from '../../../components/DayActivityDetails'; // Added import
 
 SplashScreen.preventAutoHideAsync();
 
@@ -15,6 +16,7 @@ const UserDashboard = () => {
   const [fontsLoaded] = useFonts({
     "Poppins_Regular": require("../../../assets/fonts/poppins/Poppins-Regular.ttf"),
     "Poppins_Bold": require("../../../assets/fonts/poppins/Poppins-Bold.ttf"),
+    "Poppins_SemiBold": require("../../../assets/fonts/poppins/Poppins-SemiBold.ttf"), // Assuming this font is available for DayActivityDetails
   });
 
   // States for activity calendar
@@ -22,6 +24,12 @@ const UserDashboard = () => {
   const [isLoadingCalendar, setIsLoadingCalendar] = useState(true);
   const [calendarError, setCalendarError] = useState<string | null>(null);
   const [currentCalendarMonth, setCurrentCalendarMonth] = useState(new Date().toISOString().slice(0, 7)); // YYYY-MM
+
+  // States for day activity details
+  const [selectedDateForDetails, setSelectedDateForDetails] = useState<string | null>(null);
+  const [dayActivityDetails, setDayActivityDetails] = useState<DetailedActivity[]>([]);
+  const [isLoadingDetails, setIsLoadingDetails] = useState(false);
+  const [detailsError, setDetailsError] = useState<string | null>(null);
 
   useEffect(() => {
     if (fontsLoaded) {
@@ -33,24 +41,14 @@ const UserDashboard = () => {
     setIsLoadingCalendar(true);
     setCalendarError(null);
     try {
-      // SIMULANDO CHAMADA DE API
       console.log(`Fetching data for userId: ${userId}, month: ${month}`);
-      // Substitua pela sua lógica de chamada de API real. Ex:
-      // const response = await axios.get(`https://api.example.com/user/${userId}/practice-log?month=${month}`);
-      // const data = response.data.data; // Assumindo que os dados estão em response.data.data
-
-      // Dados mockados para simulação - SUBSTITUA QUANDO A API ESTIVER PRONTA
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simula delay da rede
+      await new Promise(resolve => setTimeout(resolve, 1000));
       const mockApiResponse = [
         { date: `${month}-10`, activities: ["lição"], summary: "Lição de Matemática" },
         { date: `${month}-15`, activities: ["vídeo", "exercício"], summary: "Vídeo de História e Exercícios" },
         { date: `${month}-22`, activities: ["lição", "exercício"], summary: "Lição de Física e Exercícios" },
       ];
-
-      // Filtrar dados para o mês atual para evitar problemas com datas inválidas se o mock for genérico
       const filteredData = mockApiResponse.filter(item => item.date.startsWith(month));
-
-      // Formatar dados para o ActivityCalendar
       const formattedData = filteredData.reduce((acc, item) => {
         acc[item.date] = {
           customStyles: {
@@ -60,38 +58,67 @@ const UserDashboard = () => {
         };
         return acc;
       }, {});
-
       setActivityData(formattedData);
-
     } catch (error) {
       console.error("Failed to fetch practice data:", error);
       setCalendarError("Não foi possível carregar os dados de frequência.");
-      setActivityData({}); // Limpa dados em caso de erro
+      setActivityData({});
     } finally {
       setIsLoadingCalendar(false);
     }
   };
 
+  const fetchDayActivityDetails = async (userId: string, date: string) => {
+    if (!date) return;
+    setIsLoadingDetails(true);
+    setDetailsError(null);
+    setDayActivityDetails([]);
+
+    try {
+      console.log(`Fetching details for userId: ${userId}, date: ${date}`);
+      await new Promise(resolve => setTimeout(resolve, 700));
+      let mockDetailedResponse: DetailedActivity[] = [];
+      if (date === new Date().toISOString().slice(0, 10) || date.endsWith('-10') || date.endsWith('-15') || date.endsWith('-22')) {
+        mockDetailedResponse = [
+          { id: 'detail1', type: 'lição', title: `Lição de Exemplo para ${date}`, status: 'Concluída', courseName: 'Curso de React Native', description: 'Revisar os conceitos básicos de componentes.' },
+          { id: 'detail2', type: 'vídeo', title: 'Vídeo sobre Hooks', durationMinutes: 25, description: 'Como usar useState e useEffect efetivamente.' },
+          { id: 'detail3', type: 'exercício', title: 'Exercícios de Lógica em JS', score: 8, totalScore: 10, status: 'Finalizado', courseName: 'JavaScript Avançado' },
+        ];
+      } else if (date.endsWith('-05')) {
+          mockDetailedResponse = [];
+      } else {
+          mockDetailedResponse = [
+              { id: 'detail_other', type: 'leitura', title: `Artigo sobre Performance em ${date}`, status: 'Lido', description: 'Um artigo interessante sobre otimizações.'}
+          ];
+      }
+      setDayActivityDetails(mockDetailedResponse);
+    } catch (error) {
+      console.error("Failed to fetch day activity details:", error);
+      setDetailsError("Não foi possível carregar os detalhes das atividades.");
+    } finally {
+      setIsLoadingDetails(false);
+    }
+  };
+
   useEffect(() => {
-    const userId = "123"; // Obtenha o ID do usuário logado aqui
-    if (fontsLoaded) { // Ensure fonts are loaded before fetching data that might rely on custom fonts in calendar
+    const userId = "123";
+    if (fontsLoaded) {
         fetchPracticeData(userId, currentCalendarMonth);
     }
-  }, [currentCalendarMonth, fontsLoaded]); // Re-executa quando currentCalendarMonth ou fontsLoaded muda
+  }, [currentCalendarMonth, fontsLoaded]);
 
   if (!fontsLoaded) {
     return <ActivityIndicator size="large" color="#1261D7" style={styles.loading} />;
   }
 
   const screenWidth = Dimensions.get("window").width;
-  const data = {
+  const chartData = { // Renamed from 'data' to avoid conflict if 'data' is used elsewhere
     labels: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
     datasets: [{ data: [2, 3, 5, 1, 4, 2, 6] }],
   };
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      {/* Cabeçalho */}
       <View style={styles.header}>
         <Pressable>
           <Link href={'../'}>
@@ -101,24 +128,21 @@ const UserDashboard = () => {
         <Text style={styles.headerTitle}>Página Inicial</Text>
       </View>
 
-      {/* Conteúdo */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.profileSection}>
           <Image source={{ uri: "" }} style={styles.profilePic} />
           <Text style={styles.userName}>Olá, Estudante!</Text>
         </View>
 
-        {/* Estatísticas */}
         <View style={styles.statsCard}>
           <Text style={styles.sectionTitle}>Progresso</Text>
           <ProgressBar progress={0.6} color="#1261D7" style={styles.progressBar} />
         </View>
 
-        {/* Gráfico */}
         <View style={styles.chartContainer}>
           <Text style={styles.chartTitle}>Tempo de Estudo (Horas)</Text>
           <BarChart
-            data={data}
+            data={chartData}
             width={screenWidth * 0.9}
             height={220}
             yAxisLabel=""
@@ -134,7 +158,6 @@ const UserDashboard = () => {
           />
         </View>
 
-        {/* Metas */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Metas da Semana</Text>
           <Text style={styles.sectionText}>- Revisar 3 capítulos de Matemática</Text>
@@ -142,24 +165,42 @@ const UserDashboard = () => {
           <Text style={styles.sectionText}>- Fazer 2 redações</Text>
         </View>
 
-        {/* Calendário de Atividades */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Minha Frequência</Text>
           {isLoadingCalendar && <ActivityIndicator size="small" color="#1261D7" style={{ marginVertical: 10 }} />}
-          {calendarError && <Text style={{ color: 'red', textAlign: 'center', marginVertical: 10 }}>{calendarError}</Text>}
+          {calendarError && <Text style={styles.errorText}>{calendarError}</Text>}
           {!isLoadingCalendar && !calendarError && (
             <ActivityCalendar
               initialMonth={currentCalendarMonth}
               markedDates={activityData}
-              onDayPress={(day) => console.log(`Dia selecionado no perfil: ${day}`)}
+              onDayPress={(dayString) => {
+                setSelectedDateForDetails(dayString);
+                const userId = "123";
+                fetchDayActivityDetails(userId, dayString);
+              }}
               onMonthChange={(newMonth) => {
-                setCurrentCalendarMonth(newMonth); // Assuming newMonth is already 'YYYY-MM'
+                setCurrentCalendarMonth(newMonth);
+                setSelectedDateForDetails(null); // Clear details when month changes
+                setDayActivityDetails([]);
               }}
             />
           )}
         </View>
 
-        {/* Botões */}
+        {/* Seção de Detalhes da Atividade Diária */}
+        {selectedDateForDetails && (
+          <View style={styles.detailsSectionContainer}>
+            {isLoadingDetails && <ActivityIndicator size="small" color="#1261D7" style={{ marginVertical: 20 }} />}
+            {detailsError && <Text style={styles.errorText}>{detailsError}</Text>}
+            {!isLoadingDetails && !detailsError && (
+              <DayActivityDetails
+                selectedDate={selectedDateForDetails}
+                activities={dayActivityDetails}
+              />
+            )}
+          </View>
+        )}
+
         <TouchableOpacity style={styles.button}>
           <Ionicons name="person-circle-outline" size={24} color="#FFF" />
           <Text style={styles.buttonText}>Editar Perfil</Text>
@@ -193,6 +234,16 @@ const styles = StyleSheet.create({
   sectionText: { color: "#1261D7", fontFamily: "Poppins_Regular", fontSize: 16, textAlign: "center" },
   button: { flexDirection: "row", alignItems: "center", justifyContent: "center", backgroundColor: "#1261D7", padding: 15, borderRadius: 20, marginBottom: 10 },
   buttonText: { color: "#fff", fontSize: 16, marginLeft: 10, fontFamily: "Poppins_Bold" },
+  detailsSectionContainer: { // New Style
+    marginTop: 10,
+  },
+  errorText: { // New Style (or use existing if suitable)
+    color: 'red',
+    textAlign: 'center',
+    marginVertical: 10,
+    fontSize: 14,
+    fontFamily: 'Poppins_Regular', // Assuming Poppins_Regular is loaded
+  },
 });
 
 export default UserDashboard;
