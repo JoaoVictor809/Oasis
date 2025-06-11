@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import ActivityCalendar, { ActivityCalendarProps } from '../ActivityCalendar'; // Ajuste o caminho se necessário
+import ActivityCalendar, { ActivityCalendarProps } from './ActivityCalendar'; // Ajuste o caminho se necessário
 
 // Mock para react-native-calendars, já que não queremos testar a biblioteca em si,
 // mas sim a integração do nosso componente com ela.

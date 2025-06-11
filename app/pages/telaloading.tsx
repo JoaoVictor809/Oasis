@@ -13,8 +13,8 @@ import { useRouter } from "expo-router";
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 const WaveCircularProgress = ({ progress = 50 }) => {
-  const waveHeight = useSharedValue(10); // Amplitude da onda
-  const waveOffset = useSharedValue(0); // Deslocamento horizontal da onda
+  const waveHeight = useSharedValue(10);
+  const waveOffset = useSharedValue(0); 
 
   useEffect(() => {
     waveOffset.value = withRepeat(
