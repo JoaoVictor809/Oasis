@@ -148,7 +148,7 @@ export default function Register() {
 
               // Validação
               if (numericText.length === 0) {
-                setCpf('');
+                setErrorCpf('');
               } else if (numericText.length < 11) {
                 setErrorCpf('O CPF deve conter 11 caracteres.');
               } else {
@@ -199,11 +199,9 @@ export default function Register() {
                 const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(text);
                 if (text.length === 0) {
                   setErrorPassword('');
-                } else if (text.length < 8 && !hasSpecialChar) {
-                  setErrorPassword('A senha deve conter 8 caracteres.')
-                } else if (!hasSpecialChar) {
-                  setErrorPassword('A senha precisa conter pelo menos um caractere especial.');
-                } else {
+                } else if (text.length < 8 || !hasSpecialChar) {
+                  setErrorPassword('Senha: mínimo 8 caracteres e 1 caractere especial.')
+                }  else {
                   setErrorPassword('');
                 }
               }}
@@ -245,7 +243,7 @@ export default function Register() {
           />
           {/* Mensagem de erro  de confirmação*/}
           {errorConfirmPassword !== '' && (
-            <Text style={{ color: 'red', marginTop: 5 }}>{errorConfirmPassword}</Text>
+            <Text style={{ color: 'red', marginTop: 5, fontFamily: 'Poppins_Bold' }}>{errorConfirmPassword}</Text>
           )}
 
           <Pressable
