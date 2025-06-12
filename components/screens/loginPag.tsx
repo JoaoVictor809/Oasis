@@ -1,24 +1,47 @@
 import React, { useState } from 'react';
-import { View, Text, Image, Pressable, SafeAreaView, ImageBackground, TextInput, Alert } from 'react-native';
+import { View, Text, Image, Pressable, SafeAreaView, ImageBackground, TextInput, Alert, TouchableOpacity } from 'react-native';
 import Estilo from '../../assets/style/login';
 import { useRouter } from "expo-router";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loginUser } from '../../services/hooks/useLogin';
 import axios from 'axios';
+import { useLocalSearchParams } from 'expo-router';
+import Toast from 'react-native-toast-message';
+import { useEffect } from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome6';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [password, setPassword] = useState('');
   const router = useRouter();
+  const params = useLocalSearchParams();
+  const [showPassword, setShowPassword] = useState(false);
+  const [hasShownToast, setHasShownToast] = useState(false);
+
+  useEffect(() => {
+    if (params?.fromRegister === 'true' && !hasShownToast) {
+      Toast.show({
+        type: 'success',
+        text1: 'Usuário cadastrado!',
+        text2: 'Faça login para continuar.',
+        position: 'top',
+      });
+      setHasShownToast(true);
+    }
+  }, [params, hasShownToast]);
 
   const handleLogin = async () => {
-    if (!email || !senha) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos.');
-      return;
+    if(!email || !password) {
+      Toast.show({
+        type: 'error',
+        text1: 'Campos vazios',
+        text2: 'Preencha todos os campos.',
+        position: 'top',
+      });
     }
 
     try {
-      const data = await loginUser({ email, password: senha });
+      const data = await loginUser({ email, password: password });
 
       if (!data.token) {
         Alert.alert('Erro', 'Token não recebido.');
@@ -28,18 +51,32 @@ export default function LoginScreen() {
       await AsyncStorage.setItem('userToken', data.token);
 
       console.log('Login realizado com sucesso!');
-      router.push('./'); 
+      router.push('./');
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         const status = error.response?.status;
 
         if (status === 401) {
-          Alert.alert('Erro', 'Senha incorreta.');
+          Toast.show({
+            type: 'error',
+            text1: 'Senha incorreta',
+            text2: 'Informe a senha correta.',
+            position: 'top',
+          });
         } else if (status === 404) {
-          Alert.alert('Erro', 'Usuário não encontrado.');
+          Toast.show({
+            type: 'error',
+            text1: 'Usuário não encontrado',
+            text2: 'Verifique o e-mail informado.',
+            position: 'top',
+          });
         } else {
-          Alert.alert('Erro', 'Erro ao realizar login.');
-        }
+          Toast.show({
+            type: 'error',
+            text1: 'Erro ao realizar o login',
+            position: 'top',
+          });
+        }        
 
         console.error('Erro no login:', error.message);
       } else {
@@ -51,6 +88,7 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#1261D7" }}>
+      <Toast />
       <View style={Estilo.container}>
         <ImageBackground
           source={require('../../assets/images/forma001.png')}
@@ -75,19 +113,33 @@ export default function LoginScreen() {
             keyboardType="email-address"
             autoCapitalize="none"
           />
-          <TextInput
-            style={Estilo.input}
-            onChangeText={setSenha}
-            value={senha}
-            placeholder="Senha"
-            secureTextEntry={true}
-          />
+          <View style={Estilo.boxInput}>
+            <TextInput
+              style={Estilo.inputPassword}
+              onChangeText={setPassword}
+              value={password}
+              placeholder="Senha"
+              secureTextEntry={!showPassword}
+              keyboardType="default"
+              placeholderTextColor="#fff"
+            />
+            {password.length > 0 && (
+              <TouchableOpacity
+                onPress={() => setShowPassword(!showPassword)}
+                style={{ position: 'absolute', right: 10, top: 10 }}
+              >
+                <Icon name={showPassword ? 'eye-slash' : 'eye'} size={24} color="#FFF" />
+              </TouchableOpacity>
+            )}
+          </View>
 
-          <Pressable onPress={handleLogin}>
+          
+            <TouchableOpacity onPress={handleLogin}>
             <View style={Estilo.enter}>
               <Text style={{ fontFamily: "Poppins_Bold", color: "#fff", fontSize: 20 }}>Entrar</Text>
             </View>
-          </Pressable>
+            </TouchableOpacity>
+          
         </View>
 
         <View style={Estilo.containerRegister}>
