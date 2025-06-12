@@ -1,8 +1,14 @@
-import React from "react"; // Removed useEffect, useState
+import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-// Removed import * as Font from "expo-font";
-// Removed loadFonts function
+import * as Font from "expo-font";
+
+const loadFonts = () => {
+  return Font.loadAsync({
+    "Poppins-Regular": require("../../../../assets/fonts/poppins/Poppins-Regular.ttf"),
+    "Poppins-Bold": require("../../../../assets/fonts/poppins/Poppins-Bold.ttf"),
+  });
+};
 
 const modulos = [
   {
@@ -87,9 +93,19 @@ const ModuloList = ({ title, data }) => (
 );
 
 export default function ENEMCourseScreen() {
-  // Removed fontsLoaded state
-  // Removed useEffect for font loading
-  // Removed conditional rendering for fontsLoaded
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    async function fetchFonts() {
+      await loadFonts();
+      setFontsLoaded(true);
+    }
+    fetchFonts();
+  }, []);
+
+  if (!fontsLoaded) {
+    return <Text style={styles.loadingText}>Carregando fontes...</Text>;
+  }
 
   return (
     <ScrollView style={styles.scrollContainer}>
@@ -106,12 +122,11 @@ const styles = StyleSheet.create({
   scrollContainer: { flex: 1, backgroundColor: "#f5f5f5" },
   container: { padding: 20 },
 
-  // loadingText style can be removed if no longer used, but keeping it doesn't harm
   loadingText: {
     fontSize: 18,
     textAlign: "center",
     marginTop: 50,
-    fontFamily: "Poppins-Regular", // This will now rely on global font loading
+    fontFamily: "Poppins-Regular",
   },
 
   moduleContainer: {
@@ -132,7 +147,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     color: "#1261D7",
-    fontFamily: "Poppins-Bold", // This will now rely on global font loading
+    fontFamily: "Poppins-Bold",
   },
 
   card: { backgroundColor: "white", borderRadius: 10, marginVertical: 5 },
@@ -152,7 +167,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: "#fff",
-    fontFamily: "Poppins-Bold", // This will now rely on global font loading
+    fontFamily: "Poppins-Bold",
   },
 
   icon: { marginLeft: 10, color: "#FFF" },
@@ -165,7 +180,5 @@ const styles = StyleSheet.create({
 
   testButtonText: {
     color: "#1261D7",
-    // fontFamily for testButtonText was not specified, if it needs Poppins-Bold, it should be added here.
-    // However, Poppins-Bold is already on buttonText, and this is a modification of it.
   },
 });
