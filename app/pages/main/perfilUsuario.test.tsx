@@ -8,8 +8,9 @@ jest.mock('../../../components/ActivityCalendar', () => {
   // const ActualActivityCalendar = jest.requireActual('../../../components/ActivityCalendar');
   return jest.fn(({ onDayPress, onMonthChange, initialMonth, markedDates }) => (
     <div data-testid="mock-activity-calendar">
-      <button data-testid="calendar-day-press" onClick={() => onDayPress('2024-07-10')} />
-      <button data-testid="calendar-month-change" onClick={() => onMonthChange('2024-08')} />
+      <button data-testid="calendar-day-press" onClick={() => onDayPress('2024-07-10')}>Press Day</button>
+      <button data-testid="calendar-error-trigger" onClick={() => onDayPress('ERROR_DATE')}>Simulate Error Press</button>
+      <button data-testid="calendar-month-change" onClick={() => onMonthChange('2024-08')}>Change Month</button>
       <span>{initialMonth}</span>
       <span>{JSON.stringify(markedDates)}</span>
     </div>
@@ -57,6 +58,16 @@ describe('UserDashboard - Day Activity Details Integration', () => {
     // Se UserDashboard fizer chamadas de API reais no futuro, mocká-las aqui.
     // jest.spyOn(global, 'fetch').mockResolvedValueOnce(...);
   });
+
+  // Needed for awaiting state updates related to fetchDayActivityDetails
+  beforeAll(() => {
+    jest.useFakeTimers(); // Mock timers for async operations like setTimeout in fetch
+  });
+
+  afterAll(() => {
+    jest.useRealTimers(); // Restore real timers
+  });
+
 
   it('fetches and displays day activity details on day press', async () => {
     const { getByTestId, queryByTestId, findByTestId } = render(<UserDashboard />);
@@ -121,19 +132,29 @@ describe('UserDashboard - Day Activity Details Integration', () => {
     // Este teste é mais um placeholder para quando a chamada de API for real.
     // Se a função fetchDayActivityDetails fosse importada de outro módulo:
     // jest.spyOn(apiModule, 'fetchDayActivityDetails').mockRejectedValueOnce(new Error('API Error'));
+    // A modificação em fetchDayActivityDetails para simular erro com "ERROR_DATE" já foi feita.
 
-    const { getByTestId, findByText } = render(<UserDashboard />);
-    // (Precisa de uma forma de simular o erro. No código atual, o erro é tratado internamente)
-    // Supondo que uma data específica no mock de fetchDayActivityDetails cause um erro:
-    // No mock atual, não há um caminho de erro explícito, apenas console.error.
-    // Para testar o estado de erro, o mock em fetchDayActivityDetails precisaria fazer:
-    // if (date === 'ERROR_DATE') { setDetailsError(...); setIsLoadingDetails(false); return; }
+    const { getByTestId, findByText, queryByTestId } = render(<UserDashboard />);
 
-    // fireEvent.press(getByTestId('calendar-day-press-que-causa-erro'));
-    // const errorMessage = await findByText("Não foi possível carregar os detalhes das atividades.");
-    // expect(errorMessage).toBeTruthy();
-    console.log("Teste de erro para fetchDayActivityDetails precisa de ajuste no mock da função para simular falha.");
-    expect(true).toBe(true); // Placeholder
+    // Simular clique no botão que dispara onDayPress('ERROR_DATE')
+    fireEvent.press(getByTestId('calendar-error-trigger'));
+
+    // Aguardar a mensagem de erro
+    const errorMessage = await findByText("Não foi possível carregar os detalhes das atividades.");
+    expect(errorMessage).toBeTruthy();
+
+    // Verificar que os detalhes não estão visíveis
+    expect(queryByTestId('mock-day-activity-details')).toBeNull();
+
+    // Verificar se o DayActivityDetails não foi chamado (ou foi chamado e retornou null/vazio)
+    // Como o erro acontece antes da chamada efetiva com dados, ele não deve ser renderizado com dados.
+    const DayActivityDetailsMock = require('../../../components/DayActivityDetails');
+    // Dependendo da lógica, DayActivityDetails pode ser chamado antes do erro ser setado,
+    // ou a lógica de renderização pode fazer com que ele não apareça.
+    // Se selectedDateForDetails ainda for "ERROR_DATE" mas detailsError estiver setado,
+    // DayActivityDetails não renderiza os detalhes, mas o componente em si pode ser "chamado".
+    // O importante é que a *mensagem de erro* apareça e *conteúdo de sucesso* não.
+    // A verificação de queryByTestId('mock-day-activity-details') == null é mais robusta aqui.
   });
 
   it('clears details when the month is changed', async () => {
