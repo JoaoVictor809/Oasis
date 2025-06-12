@@ -1,0 +1,28 @@
+{
+  "name": "oasis",
+  "version": "1.0.0",
+  "description": "Este é um projeto [Expo](https://expo.dev) criado com [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).",
+  "main": "babel.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoaoVictor809/Oasis.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/JoaoVictor809/Oasis/issues"
+  },
+  "homepage": "https://github.com/JoaoVictor809/Oasis#readme",
+  "dependencies": {
+    "expo": "^53.0.11",
+    "expo-splash-screen": "^0.30.9",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-native": "^0.80.0"
+  }
+}
