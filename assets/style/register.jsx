@@ -5,6 +5,7 @@ export default StyleSheet.create({
         flex: 1, 
         justifyContent: 'flex-start', 
         alignItems: 'flex-end',
+        zIndex:-1
         
     },
     forma001: {
