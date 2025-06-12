@@ -19,6 +19,7 @@ import { TextInputMask } from 'react-native-masked-text';
 import { registerUser } from '../../services/hooks/useRegister';
 import Loader from '../../components/Loader/loader';
 import Icon from 'react-native-vector-icons/FontAwesome6';
+import Toast from 'react-native-toast-message'; 
 
 SplashScreen.preventAutoHideAsync();
 
@@ -55,10 +56,24 @@ export default function Register() {
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const handleSubmit =(async() =>{
-    if(!emailRegex.test(email)){
-      alert('Email invalido')
-    } else{
+  const handleSubmit = async () => {
+    //verificação dos campos vazios
+    if (!name || !cpf || !endereco || !email || !data || !password || !confirmPassword) {
+      Toast.show({
+        type: 'error',
+        text1: 'Preencha todos os campos',
+        position: 'top',
+      });
+      return;
+    }
+    //verificação do formatyo email 
+    if (!emailRegex.test(email)) {
+      Toast.show({
+        type: 'error',
+        text1: 'Formato de email inválido',
+        position: 'top',
+      });
+    } else {
       try {
         setLoading(true);
         const user = {
@@ -67,24 +82,36 @@ export default function Register() {
           endereco,
           email,
           data_nascimento: formatarData(data),
-          password: password
+          password: password,
         };
-
+  
         await registerUser(user);
-
-        console.log("Cadastro realizado com sucesso!");
-
+  
+        Toast.show({
+          type: 'success',
+          text1: 'Cadastro realizado com sucesso!',
+          position: 'top',
+        });
+        
         setTimeout(() => {
           setLoading(false);
-          router.push("/pages/main/login");
+          router.push({
+            pathname: '/pages/main/login',
+            params: { fromRegister: 'true' } 
+          });
         }, 4000);
       } catch (error) {
         setLoading(false);
         console.error(error);
-        alert("Erro ao cadastrar. Verifique os dados e tente novamente.");
-      } 
+        Toast.show({
+          type: 'error',
+          text1: 'Erro ao cadastrar',
+          text2: 'Verifique os dados e tente novamente.',
+          position: 'top',
+        });
+      }
     }
-  })
+  };
 
   useEffect(() => {
     if (fontsLoaded) {
@@ -104,6 +131,7 @@ export default function Register() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <Toast />
 
       <View style={{ position: 'absolute', left: 10, top: 10, zIndex: 11 }}>
         <Pressable onPress={() => router.push('./main/login')} >
@@ -246,14 +274,13 @@ export default function Register() {
             <Text style={{ color: 'red', marginTop: 5, fontFamily: 'Poppins_Bold' }}>{errorConfirmPassword}</Text>
           )}
 
-          <Pressable
-            style={{ width: '75%', paddingTop: 10 }}
-            onPress={handleSubmit}
-          >
+          
+            <TouchableOpacity style={{ width: '75%', paddingTop: 10 }}
+            onPress={handleSubmit}>
             <View style={Estilo.enter}>
               <Text style={{ fontFamily: "Poppins_Bold", color: "#fff", fontSize: 20 }}>Cadastrar</Text>
             </View>
-          </Pressable>
+            </TouchableOpacity>
         </View>
 
         <View style={Estilo.containerLogin}>
