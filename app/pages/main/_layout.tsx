@@ -33,7 +33,7 @@ export default function _layout() {
             />
 
             <Tabs.Screen
-                name='login'
+                name='perfilUsuario'
                 options={{
                     title: "User",
                     headerShown: false
