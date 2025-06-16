@@ -4,15 +4,11 @@
   "description": "Este é um projeto [Expo](https://expo.dev) criado com [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).",
   "main": "babel.config.js",
   "scripts": {
-<<<<<<< HEAD
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest"
-=======
-    "test": "echo \"Error: no test specified\" && exit 1"
->>>>>>> aa6aa583bf99ca074b8092dbb29ee8385c4cb579
   },
   "repository": {
     "type": "git",
@@ -21,16 +17,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-<<<<<<< HEAD
-=======
-  "type": "commonjs",
->>>>>>> aa6aa583bf99ca074b8092dbb29ee8385c4cb579
   "bugs": {
     "url": "https://github.com/JoaoVictor809/Oasis/issues"
   },
   "homepage": "https://github.com/JoaoVictor809/Oasis#readme",
   "dependencies": {
-<<<<<<< HEAD
     "@gorhom/bottom-sheet": "^5.1.6",
     "@lottiefiles/dotlottie-react": "^0.14.1",
     "@react-native-async-storage/async-storage": "^2.2.0",
@@ -69,12 +60,5 @@
   },
   "jest": {
     "preset": "jest-expo"
-=======
-    "expo": "^53.0.11",
-    "expo-splash-screen": "^0.30.9",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-native": "^0.80.0"
->>>>>>> aa6aa583bf99ca074b8092dbb29ee8385c4cb579
   }
 }
